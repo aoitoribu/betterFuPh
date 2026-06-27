@@ -1,0 +1,12 @@
+﻿node_modules/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+docs/public/courses/
+docs/public/past-exams/
+docs/public/lecture-notes/
+docs/public/research-tools/
+docs/public/feed.xml
+docs/public/sitemap.xml
+*.local
+.DS_Store
+Thumbs.db
