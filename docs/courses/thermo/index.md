@@ -4,7 +4,7 @@ title: 热力学与统计物理
 
 # 热力学与统计物理
 
-本页先整理统计物理部分。目标不是重讲教材，而是把考试时最常用的定义、公式、推导入口、二级结论和标准题型压成一份可直接调用的突击讲义。
+本页整理“热力学与统计物理 I”的突击复习内容。前半部分是统计物理，后半部分是热力学；目标不是重讲教材，而是把考试时最常用的定义、公式、推导入口、二级结论和标准题型压成一份可直接调用的讲义。
 
 ## 0. 符号表与一页总览
 
@@ -1087,3 +1087,2034 @@ $$
 $$
 
 若不会继续，就写“临界指数由不动点线性化本征值决定；微观参数只影响非普适幅度”。
+
+---
+
+# 热力学突击复习讲义
+
+## 13. 热力学符号表与总路线
+
+| 符号 | 含义 | 常用关系 |
+|---|---|---|
+| $U$ | 内能 | $dU=T\,dS-p\,dV+\mu\,dN$ |
+| $S$ | 熵 | $dS=\delta Q_{rev}/T$ |
+| $T$ | 热力学温度 | $1/T=(\partial S/\partial U)_{V,N}$ |
+| $p$ | 压强 | $p/T=(\partial S/\partial V)_{U,N}$ |
+| $\mu$ | 化学势 | $-\mu/T=(\partial S/\partial N)_{U,V}$ |
+| $H$ | 焓 | $H=U+pV$ |
+| $F$ | Helmholtz 自由能 | $F=U-TS$ |
+| $G$ | Gibbs 自由能 | $G=U-TS+pV=\mu N$ |
+| $C_V,C_p$ | 定容、定压热容 | $C_X=T(\partial S/\partial T)_X$ |
+| $\alpha$ | 体膨胀系数 | $\alpha=V^{-1}(\partial V/\partial T)_p$ |
+| $\kappa_T$ | 等温压缩系数 | $\kappa_T=-V^{-1}(\partial V/\partial p)_T$ |
+| $L$ | 潜热 | $L=T\Delta S$ |
+
+热力学解题主线只有四步：
+
+1. 先判断自然变量：$U(S,V,N)$、$H(S,p,N)$、$F(T,V,N)$、$G(T,p,N)$ 哪个最顺手。
+2. 写对应微分式，直接读出偏导数。
+3. 用混合偏导相等推出 Maxwell 关系。
+4. 遇到相变或过程题，分别套平衡条件、Clapeyron 方程、第一/第二定律。
+
+总公式：
+
+$$
+dU=T\,dS-p\,dV+\mu\,dN.
+$$
+
+其中 $T$ 是温度，$S$ 是熵，$p$ 是压强，$V$ 是体积，$\mu$ 是化学势，$N$ 是粒子数。对简单可压缩单组分体系，后面几乎所有公式都从这一行通过 Legendre 变换推出。
+
+## 14. 热力学基本定律与基本方程
+
+### 核心公式
+
+热力学第零定律保证温度可定义：若 $A$ 与 $C$ 热平衡，$B$ 与 $C$ 热平衡，则 $A$ 与 $B$ 热平衡。
+
+第一定律采用“体系对外做功为正”的约定：
+
+$$
+dU=\delta Q-\delta W,
+\qquad
+\delta W=p\,dV
+\quad(\text{准静态体积功}).
+$$
+
+可逆过程中：
+
+$$
+\delta Q_{rev}=T\,dS,
+\qquad
+dU=T\,dS-p\,dV.
+$$
+
+第二定律的 Clausius 不等式：
+
+$$
+dS\ge \frac{\delta Q}{T_{env}},
+\qquad
+\oint\frac{\delta Q}{T}\le 0.
+$$
+
+等号对应可逆过程，不等号对应不可逆过程。孤立体系满足：
+
+$$
+\Delta S_{isolated}\ge 0.
+$$
+
+第三定律常用表述：
+
+$$
+\lim_{T\to 0}S(T)=S_0.
+$$
+
+完美晶体通常取 $S_0=0$，因此低温绝对熵可由热容积分得到：
+
+$$
+S(T)=\int_0^T\frac{C(T')}{T'}\,dT'.
+$$
+
+### 第一性原理推导抓手
+
+把熵看成基本函数 $S=S(U,V,N)$：
+
+$$
+dS=\left(\frac{\partial S}{\partial U}\right)_{V,N}dU
++\left(\frac{\partial S}{\partial V}\right)_{U,N}dV
++\left(\frac{\partial S}{\partial N}\right)_{U,V}dN.
+$$
+
+定义强度量：
+
+$$
+\frac{1}{T}=\left(\frac{\partial S}{\partial U}\right)_{V,N},
+\qquad
+\frac{p}{T}=\left(\frac{\partial S}{\partial V}\right)_{U,N},
+\qquad
+-\frac{\mu}{T}=\left(\frac{\partial S}{\partial N}\right)_{U,V}.
+$$
+
+于是
+
+$$
+dS=\frac{1}{T}dU+\frac{p}{T}dV-\frac{\mu}{T}dN,
+$$
+
+两边乘以 $T$：
+
+$$
+dU=T\,dS-p\,dV+\mu\,dN.
+$$
+
+考试中若问“温度、压强、化学势的热力学定义”，直接从 $S(U,V,N)$ 写出上面三条。
+
+### 二级结论
+
+- 孤立体系平衡条件：$S$ 最大。
+- 恒温恒容体系平衡条件：$F$ 最小。
+- 恒温恒压体系平衡条件：$G$ 最小。
+- 恒熵恒压体系平衡条件：$H$ 最小。
+- 可逆绝热：$dS=0$；不可逆绝热：$\Delta S>0$。
+- 准静态不一定可逆；可逆一定准静态且无耗散。
+- 态函数：$U,S,H,F,G$ 的变化只看初末态；过程量：$Q,W$ 依赖路径。
+
+### 易混对照
+
+| 条件 | 自发判据 | 平衡判据 |
+|---|---|---|
+| 孤立，$U,V,N$ 固定 | $\Delta S>0$ | $S$ 最大 |
+| $T,V,N$ 固定 | $\Delta F<0$ | $F$ 最小 |
+| $T,p,N$ 固定 | $\Delta G<0$ | $G$ 最小 |
+| $S,p,N$ 固定 | $\Delta H<0$ | $H$ 最小 |
+
+## 15. 热力学势、Legendre 变换与 Maxwell 关系
+
+### 核心公式
+
+四个常用热力学势：
+
+$$
+\begin{aligned}
+U&=U(S,V,N),\\
+H&=U+pV,\\
+F&=U-TS,\\
+G&=U-TS+pV.
+\end{aligned}
+$$
+
+微分式：
+
+$$
+\begin{aligned}
+dU&=T\,dS-p\,dV+\mu\,dN,\\
+dH&=T\,dS+V\,dp+\mu\,dN,\\
+dF&=-S\,dT-p\,dV+\mu\,dN,\\
+dG&=-S\,dT+V\,dp+\mu\,dN.
+\end{aligned}
+$$
+
+由微分式直接读偏导：
+
+$$
+\begin{aligned}
+T&=\left(\frac{\partial U}{\partial S}\right)_{V,N},
+&
+p&=-\left(\frac{\partial U}{\partial V}\right)_{S,N},
+&
+\mu&=\left(\frac{\partial U}{\partial N}\right)_{S,V},\\
+S&=-\left(\frac{\partial F}{\partial T}\right)_{V,N},
+&
+p&=-\left(\frac{\partial F}{\partial V}\right)_{T,N},
+&
+\mu&=\left(\frac{\partial F}{\partial N}\right)_{T,V},\\
+S&=-\left(\frac{\partial G}{\partial T}\right)_{p,N},
+&
+V&=\left(\frac{\partial G}{\partial p}\right)_{T,N},
+&
+\mu&=\left(\frac{\partial G}{\partial N}\right)_{T,p}.
+\end{aligned}
+$$
+
+四条 Maxwell 关系：
+
+$$
+\begin{aligned}
+\left(\frac{\partial T}{\partial V}\right)_{S,N}
+&=-\left(\frac{\partial p}{\partial S}\right)_{V,N},\\
+\left(\frac{\partial T}{\partial p}\right)_{S,N}
+&=\left(\frac{\partial V}{\partial S}\right)_{p,N},\\
+\left(\frac{\partial S}{\partial V}\right)_{T,N}
+&=\left(\frac{\partial p}{\partial T}\right)_{V,N},\\
+\left(\frac{\partial S}{\partial p}\right)_{T,N}
+&=-\left(\frac{\partial V}{\partial T}\right)_{p,N}.
+\end{aligned}
+$$
+
+### 推导抓手
+
+Maxwell 关系不用死背。先写势函数微分，再令混合偏导相等。例如
+
+$$
+dF=-S\,dT-p\,dV.
+$$
+
+因此
+
+$$
+S=-\left(\frac{\partial F}{\partial T}\right)_V,
+\qquad
+p=-\left(\frac{\partial F}{\partial V}\right)_T.
+$$
+
+利用 $F_{TV}=F_{VT}$，得到
+
+$$
+\left(\frac{\partial S}{\partial V}\right)_T
+=
+\left(\frac{\partial p}{\partial T}\right)_V.
+$$
+
+### 二级结论
+
+- $G$ 对单组分均匀体系满足 $G=\mu N$。
+- Helmholtz 自由能给压强：$p=-(\partial F/\partial V)_T$。
+- Gibbs 自由能给体积：$V=(\partial G/\partial p)_T$。
+- 熵常可由势函数温度导数得到：$S=-(\partial F/\partial T)_V=-(\partial G/\partial T)_p$。
+- 定温定压相平衡时比较的是摩尔 Gibbs 自由能，也就是化学势。
+
+### 易混对照
+
+| 势函数 | 定义 | 自然变量 | 微分 | 最小原理 |
+|---|---|---|---|---|
+| $U$ | 内能 | $S,V,N$ | $T\,dS-p\,dV+\mu dN$ | $S,V,N$ 固定 |
+| $H$ | $U+pV$ | $S,p,N$ | $T\,dS+V\,dp+\mu dN$ | $S,p,N$ 固定 |
+| $F$ | $U-TS$ | $T,V,N$ | $-S\,dT-p\,dV+\mu dN$ | $T,V,N$ 固定 |
+| $G$ | $U-TS+pV$ | $T,p,N$ | $-S\,dT+V\,dp+\mu dN$ | $T,p,N$ 固定 |
+
+## 16. Euler 关系、Gibbs-Duhem 关系与化学势
+
+### 核心公式
+
+若 $U(S,V,N)$ 是一阶齐次函数：
+
+$$
+U(\lambda S,\lambda V,\lambda N)=\lambda U(S,V,N),
+$$
+
+Euler 定理给出：
+
+$$
+U=TS-pV+\mu N.
+$$
+
+于是
+
+$$
+G=U-TS+pV=\mu N.
+$$
+
+对 Euler 关系求微分并与基本方程相减，得到 Gibbs-Duhem 关系：
+
+$$
+S\,dT-V\,dp+N\,d\mu=0.
+$$
+
+单组分体系：
+
+$$
+d\mu=-s\,dT+v\,dp,
+$$
+
+其中 $s=S/N$ 是单粒子熵，$v=V/N$ 是单粒子体积；若用摩尔量，则 $s_m=S/n$，$v_m=V/n$。
+
+### 推导抓手
+
+化学势的三种等价定义：
+
+$$
+\mu=\left(\frac{\partial U}{\partial N}\right)_{S,V}
+=\left(\frac{\partial F}{\partial N}\right)_{T,V}
+=\left(\frac{\partial G}{\partial N}\right)_{T,p}.
+$$
+
+相平衡、扩散平衡和化学平衡本质都是“相应约束下 $G$ 最小”，所以粒子从高 $\mu$ 流向低 $\mu$，平衡时各相或各组分满足化学势条件。
+
+### 二级结论
+
+- 单组分两相平衡：$\mu^\alpha(T,p)=\mu^\beta(T,p)$。
+- 多组分多相平衡：每个组分在各相中的化学势相等。
+- 理想气体化学势常写成
+
+$$
+\mu(T,p)=\mu^\circ(T)+k_BT\ln\frac{p}{p^\circ}.
+$$
+
+- 理想混合物中
+
+$$
+\mu_i=\mu_i^\circ(T,p)+k_BT\ln x_i,
+$$
+
+其中 $x_i$ 是摩尔分数。
+
+## 17. 热容、响应函数与稳定性
+
+### 核心公式
+
+热容：
+
+$$
+C_V=\left(\frac{\partial U}{\partial T}\right)_{V,N}
+=T\left(\frac{\partial S}{\partial T}\right)_{V,N},
+$$
+
+$$
+C_p=\left(\frac{\partial H}{\partial T}\right)_{p,N}
+=T\left(\frac{\partial S}{\partial T}\right)_{p,N}.
+$$
+
+体膨胀系数与压缩系数：
+
+$$
+\alpha=\frac{1}{V}\left(\frac{\partial V}{\partial T}\right)_{p,N},
+\qquad
+\kappa_T=-\frac{1}{V}\left(\frac{\partial V}{\partial p}\right)_{T,N},
+\qquad
+\kappa_S=-\frac{1}{V}\left(\frac{\partial V}{\partial p}\right)_{S,N}.
+$$
+
+核心恒等式：
+
+$$
+C_p-C_V=
+T\left(\frac{\partial p}{\partial T}\right)_V
+\left(\frac{\partial V}{\partial T}\right)_p
+=\frac{TV\alpha^2}{\kappa_T}.
+$$
+
+压缩系数与热容比：
+
+$$
+\frac{C_p}{C_V}=\frac{\kappa_T}{\kappa_S}.
+$$
+
+稳定性条件：
+
+$$
+C_V>0,
+\qquad
+C_p>0,
+\qquad
+\kappa_T>0,
+\qquad
+\left(\frac{\partial p}{\partial V}\right)_T<0.
+$$
+
+### 推导抓手
+
+推 $C_p-C_V$ 时从
+
+$$
+dS=\left(\frac{\partial S}{\partial T}\right)_VdT
++\left(\frac{\partial S}{\partial V}\right)_TdV
+$$
+
+出发。乘以 $T$ 并令定压：
+
+$$
+C_p=T\left(\frac{\partial S}{\partial T}\right)_p
+=C_V+T\left(\frac{\partial S}{\partial V}\right)_T
+\left(\frac{\partial V}{\partial T}\right)_p.
+$$
+
+用 Maxwell 关系
+
+$$
+\left(\frac{\partial S}{\partial V}\right)_T
+=
+\left(\frac{\partial p}{\partial T}\right)_V
+$$
+
+得到第一式，再用循环关系化为 $TV\alpha^2/\kappa_T$。
+
+### 二级结论
+
+- 对理想气体：$C_p-C_V=Nk_B$ 或 $nR$。
+- 单原子理想气体：$C_V=\frac{3}{2}Nk_B$，$C_p=\frac{5}{2}Nk_B$，$\gamma=5/3$。
+- 双原子理想气体常温近似：$C_V=\frac{5}{2}Nk_B$，$C_p=\frac{7}{2}Nk_B$，$\gamma=7/5$。
+- 临界点附近 $\kappa_T$ 可发散，因为等温线变平。
+- 稳定体系的 $F(T,V)$ 对 $V$ 应凸，对应 $\kappa_T>0$。
+
+## 18. 理想气体热力学过程
+
+### 核心公式
+
+理想气体状态方程：
+
+$$
+pV=Nk_BT=nRT.
+$$
+
+内能与焓只依赖温度：
+
+$$
+dU=C_V\,dT,
+\qquad
+dH=C_p\,dT.
+$$
+
+可逆绝热过程：
+
+$$
+pV^\gamma=\text{const},
+\qquad
+TV^{\gamma-1}=\text{const},
+\qquad
+T^\gamma p^{1-\gamma}=\text{const},
+$$
+
+其中 $\gamma=C_p/C_V$。
+
+理想气体熵变：
+
+$$
+\Delta S
+=nC_V\ln\frac{T_2}{T_1}
++nR\ln\frac{V_2}{V_1},
+$$
+
+也可写成
+
+$$
+\Delta S
+=nC_p\ln\frac{T_2}{T_1}
+-nR\ln\frac{p_2}{p_1}.
+$$
+
+### 常见过程表
+
+| 过程 | 条件 | 热量 $Q$ | 功 $W=\int p\,dV$ | 内能变化 |
+|---|---|---|---|---|
+| 等容 | $V$ 不变 | $nC_V\Delta T$ | $0$ | $nC_V\Delta T$ |
+| 等压 | $p$ 不变 | $nC_p\Delta T$ | $p\Delta V=nR\Delta T$ | $nC_V\Delta T$ |
+| 等温 | $T$ 不变 | $nRT\ln(V_2/V_1)$ | $nRT\ln(V_2/V_1)$ | $0$ |
+| 可逆绝热 | $S$ 不变 | $0$ | $nC_V(T_1-T_2)$ | $nC_V\Delta T$ |
+
+### 推导抓手
+
+绝热式从
+
+$$
+dS=nC_V\frac{dT}{T}+nR\frac{dV}{V}=0
+$$
+
+积分得到
+
+$$
+C_V\ln T+R\ln V=\text{const}.
+$$
+
+利用 $R=C_p-C_V=(\gamma-1)C_V$：
+
+$$
+TV^{\gamma-1}=\text{const}.
+$$
+
+结合 $pV=nRT$ 得 $pV^\gamma=\text{const}$。
+
+### 二级结论
+
+- 理想气体自由膨胀：$Q=0,W=0,\Delta U=0,\Delta T=0,\Delta S=nR\ln(V_2/V_1)>0$。
+- 理想气体 Joule-Thomson 系数为零：$\mu_{JT}=(\partial T/\partial p)_H=0$。
+- 可逆等温膨胀做功最大；不可逆膨胀做功较小。
+- 可逆绝热线比等温线更陡：$|(\partial p/\partial V)_S|>|(\partial p/\partial V)_T|$。
+
+## 19. 热机、制冷机与 Carnot 定理
+
+### 核心公式
+
+循环过程：
+
+$$
+\Delta U=0,
+\qquad
+W=Q_{in}-Q_{out}.
+$$
+
+热机效率：
+
+$$
+\eta=\frac{W}{Q_h}=1-\frac{Q_c}{Q_h}.
+$$
+
+Carnot 热机：
+
+$$
+\eta_C=1-\frac{T_c}{T_h}.
+$$
+
+制冷机性能系数：
+
+$$
+\mathrm{COP}_R=\frac{Q_c}{W},
+\qquad
+\mathrm{COP}_{R,C}=\frac{T_c}{T_h-T_c}.
+$$
+
+热泵性能系数：
+
+$$
+\mathrm{COP}_{HP}=\frac{Q_h}{W}
+=\frac{T_h}{T_h-T_c}.
+$$
+
+Clausius 不等式对循环：
+
+$$
+\oint \frac{\delta Q}{T}\le 0.
+$$
+
+### 推导抓手
+
+Carnot 循环可逆，因此总熵变为零：
+
+$$
+\frac{Q_h}{T_h}-\frac{Q_c}{T_c}=0.
+$$
+
+所以
+
+$$
+\frac{Q_c}{Q_h}=\frac{T_c}{T_h},
+\qquad
+\eta=1-\frac{T_c}{T_h}.
+$$
+
+### 二级结论
+
+- 在两个热源之间工作的任何热机效率都不超过 Carnot 效率。
+- Carnot 效率只取决于两个热源温度，不取决于工质。
+- 可逆循环熵变总和为零；不可逆循环满足 $\Delta S_{universe}>0$。
+- 若题目给多个热源，直接用 $\sum_i Q_i/T_i\le 0$ 判定是否可能。
+
+## 20. 相平衡、Clapeyron 方程与相图
+
+### 核心公式
+
+两相平衡条件：
+
+$$
+T^\alpha=T^\beta,
+\qquad
+p^\alpha=p^\beta,
+\qquad
+\mu^\alpha=\mu^\beta.
+$$
+
+单组分两相共存线上：
+
+$$
+\mu^\alpha(T,p)=\mu^\beta(T,p).
+$$
+
+利用
+
+$$
+d\mu=-s\,dT+v\,dp,
+$$
+
+得到 Clapeyron 方程：
+
+$$
+\frac{dp}{dT}
+=\frac{s^\beta-s^\alpha}{v^\beta-v^\alpha}
+=\frac{L}{T\Delta v}.
+$$
+
+其中 $L=T\Delta s$ 是单位粒子或单位摩尔潜热，$\Delta v=v^\beta-v^\alpha$ 是相变体积差。
+
+气液相变若气相比体积远大于液相且气相近似理想气体：
+
+$$
+\frac{dp}{dT}\simeq \frac{L}{T v_g}
+=\frac{Lp}{RT^2}
+\quad(\text{摩尔量}).
+$$
+
+若 $L$ 近似常数：
+
+$$
+\ln p=-\frac{L}{R}\frac{1}{T}+\text{const}.
+$$
+
+Gibbs 相律：
+
+$$
+f=C-P+2.
+$$
+
+其中 $f$ 是自由度，$C$ 是组分数，$P$ 是相数。单组分体系 $f=3-P$。
+
+### 推导抓手
+
+Clapeyron 方程永远从 $\mu^\alpha=\mu^\beta$ 开始。沿相界移动仍相等：
+
+$$
+d\mu^\alpha=d\mu^\beta.
+$$
+
+代入 $d\mu=-s\,dT+v\,dp$：
+
+$$
+-s^\alpha dT+v^\alpha dp
+=
+-s^\beta dT+v^\beta dp.
+$$
+
+整理：
+
+$$
+\frac{dp}{dT}
+=
+\frac{s^\beta-s^\alpha}{v^\beta-v^\alpha}.
+$$
+
+再用 $L=T(s^\beta-s^\alpha)$ 得标准式。
+
+### 二级结论
+
+- 熔化线斜率由 $\Delta v$ 决定。水结冰时固相比液相体积大，熔化线斜率为负。
+- 气液相变中 $\Delta v>0$，$L>0$，所以蒸汽压曲线斜率为正。
+- 一级相变：$S,V$ 一阶导数不连续，存在潜热或体积突变。
+- 二级相变：$S,V$ 连续，但 $C_p,\alpha,\kappa_T$ 等二阶导数不连续或发散。
+- 三相点单组分 $P=3$，自由度 $f=0$，温度压强都固定。
+- 临界点处气液差别消失，潜热趋于零，等温压缩系数常发散。
+
+## 21. van der Waals 气体与临界点
+
+### 核心公式
+
+van der Waals 状态方程：
+
+$$
+\left(p+\frac{a n^2}{V^2}\right)(V-nb)=nRT.
+$$
+
+用摩尔体积 $v=V/n$：
+
+$$
+\left(p+\frac{a}{v^2}\right)(v-b)=RT.
+$$
+
+临界点满足等温线拐点条件：
+
+$$
+\left(\frac{\partial p}{\partial v}\right)_T=0,
+\qquad
+\left(\frac{\partial^2 p}{\partial v^2}\right)_T=0.
+$$
+
+对 van der Waals 气体：
+
+$$
+v_c=3b,
+\qquad
+T_c=\frac{8a}{27Rb},
+\qquad
+p_c=\frac{a}{27b^2}.
+$$
+
+临界压缩因子：
+
+$$
+Z_c=\frac{p_cv_c}{RT_c}=\frac{3}{8}.
+$$
+
+### 推导抓手
+
+先把状态方程写成
+
+$$
+p=\frac{RT}{v-b}-\frac{a}{v^2}.
+$$
+
+求导：
+
+$$
+\left(\frac{\partial p}{\partial v}\right)_T
+=-\frac{RT}{(v-b)^2}+\frac{2a}{v^3},
+$$
+
+$$
+\left(\frac{\partial^2 p}{\partial v^2}\right)_T
+=\frac{2RT}{(v-b)^3}-\frac{6a}{v^4}.
+$$
+
+令两式为零，解出 $v_c,T_c,p_c$。
+
+### 二级结论
+
+- $a$ 描述吸引作用，降低压强；$b$ 描述排斥体积，减小可用体积。
+- 机械不稳定区满足 $(\partial p/\partial V)_T>0$。
+- 真实气液共存区用 Maxwell 等面积法替代不稳定等温线。
+- 等面积法本质是两相化学势相等：
+
+$$
+\int_{v_l}^{v_g}\left[p(v,T)-p_0\right]dv=0.
+$$
+
+## 22. 开放体系、混合熵与化学平衡
+
+### 核心公式
+
+多组分体系基本方程：
+
+$$
+dU=T\,dS-p\,dV+\sum_i\mu_i\,dN_i.
+$$
+
+Gibbs 自由能微分：
+
+$$
+dG=-S\,dT+V\,dp+\sum_i\mu_i\,dN_i.
+$$
+
+多组分 Euler 关系：
+
+$$
+G=\sum_i\mu_iN_i.
+$$
+
+Gibbs-Duhem 关系：
+
+$$
+S\,dT-V\,dp+\sum_iN_i\,d\mu_i=0.
+$$
+
+理想混合熵：
+
+$$
+\Delta S_{mix}
+=-k_B\sum_i N_i\ln x_i
+=-nR\sum_i x_i\ln x_i.
+$$
+
+理想混合自由能：
+
+$$
+\Delta G_{mix}=RT\sum_i n_i\ln x_i.
+$$
+
+化学反应 $\sum_i\nu_i A_i=0$ 的平衡条件为
+
+$$
+\sum_i\nu_i\mu_i=0.
+$$
+
+### 推导抓手
+
+令反应进度为 $\xi$，则
+
+$$
+dN_i=\nu_i\,d\xi.
+$$
+
+在恒温恒压下：
+
+$$
+dG=\sum_i\mu_i\,dN_i
+=\left(\sum_i\nu_i\mu_i\right)d\xi.
+$$
+
+平衡时 $G$ 对 $\xi$ 取极小，所以
+
+$$
+\sum_i\nu_i\mu_i=0.
+$$
+
+### 二级结论
+
+- 理想溶液混合必然增熵：$\Delta S_{mix}>0$。
+- 混合自由能通常为负，因为 $\ln x_i<0$。
+- 半透膜渗透压稀溶液公式：
+
+$$
+\Pi V=n_sRT,
+$$
+
+其中 $n_s$ 是溶质物质的量。
+- 平衡常数来自化学势标准态：
+
+$$
+\Delta G^\circ=-RT\ln K.
+$$
+
+反应商 $Q$ 下：
+
+$$
+\Delta G=\Delta G^\circ+RT\ln Q.
+$$
+
+## 23. Joule-Thomson 过程、节流与实际气体
+
+### 核心公式
+
+节流过程绝热、无外功，稳流近似下焓不变：
+
+$$
+\Delta H=0.
+$$
+
+Joule-Thomson 系数：
+
+$$
+\mu_{JT}=\left(\frac{\partial T}{\partial p}\right)_H.
+$$
+
+从 $dH=T\,dS+V\,dp$ 与
+
+$$
+dS=\frac{C_p}{T}dT-
+\left(\frac{\partial V}{\partial T}\right)_pdp
+$$
+
+得到
+
+$$
+dH=C_p\,dT+
+\left[
+V-T\left(\frac{\partial V}{\partial T}\right)_p
+\right]dp.
+$$
+
+令 $dH=0$：
+
+$$
+\mu_{JT}
+=\frac{1}{C_p}
+\left[
+T\left(\frac{\partial V}{\partial T}\right)_p-V
+\right].
+$$
+
+用 $\alpha$ 写：
+
+$$
+\mu_{JT}=\frac{V}{C_p}(T\alpha-1).
+$$
+
+反转曲线：
+
+$$
+\mu_{JT}=0
+\quad\Longleftrightarrow\quad
+T\alpha=1.
+$$
+
+### 二级结论
+
+- 理想气体 $V=nRT/p$，所以 $T(\partial V/\partial T)_p=V$，故 $\mu_{JT}=0$。
+- $\mu_{JT}>0$：降压降温。
+- $\mu_{JT}<0$：降压升温。
+- 节流不是可逆绝热膨胀；可逆绝热满足 $S$ 不变，节流满足 $H$ 不变且熵增加。
+
+## 24. 热力学相变分类与 Ehrenfest 关系
+
+### 核心公式
+
+以 Gibbs 自由能 $G(T,p)$ 为核心：
+
+$$
+dG=-S\,dT+V\,dp.
+$$
+
+一阶导数：
+
+$$
+S=-\left(\frac{\partial G}{\partial T}\right)_p,
+\qquad
+V=\left(\frac{\partial G}{\partial p}\right)_T.
+$$
+
+二阶响应：
+
+$$
+C_p=-T\left(\frac{\partial^2G}{\partial T^2}\right)_p,
+\qquad
+\alpha=\frac{1}{V}\left(\frac{\partial^2G}{\partial p\partial T}\right),
+\qquad
+\kappa_T=-\frac{1}{V}\left(\frac{\partial^2G}{\partial p^2}\right)_T.
+$$
+
+Ehrenfest 分类：
+
+- 一级相变：$G$ 连续，$S,V$ 不连续。
+- 二级相变：$G,S,V$ 连续，$C_p,\alpha,\kappa_T$ 不连续或发散。
+
+二级相变的 Ehrenfest 方程常写：
+
+$$
+\left(\frac{dp}{dT}\right)_{tr}
+=\frac{\Delta C_p}{T V \Delta \alpha},
+\qquad
+\left(\frac{dp}{dT}\right)_{tr}
+=\frac{\Delta \alpha}{\Delta \kappa_T}.
+$$
+
+### 推导抓手
+
+一级相变用 $\Delta S,\Delta V$ 不为零，直接上 Clapeyron：
+
+$$
+\frac{dp}{dT}=\frac{\Delta S}{\Delta V}.
+$$
+
+二级相变中 $\Delta S=0,\Delta V=0$，Clapeyron 变成 $0/0$，需要对 $\Delta S=0$ 或 $\Delta V=0$ 沿相界求微分，得到 Ehrenfest 方程。
+
+### 二级结论
+
+- 潜热 $L=T\Delta S$，所以二级相变无潜热。
+- 一阶导数是否连续看 $S,V$。
+- 热容、膨胀系数、压缩系数是 $G$ 的二阶导数。
+- 临界现象中 Ehrenfest 分类不够精细，通常改用临界指数描述。
+
+## 25. 常用数学工具：偏导循环、Jacobian 与快速换元
+
+### 核心公式
+
+倒数关系：
+
+$$
+\left(\frac{\partial x}{\partial y}\right)_z
+=
+\frac{1}{(\partial y/\partial x)_z}.
+$$
+
+循环关系：
+
+$$
+\left(\frac{\partial x}{\partial y}\right)_z
+\left(\frac{\partial y}{\partial z}\right)_x
+\left(\frac{\partial z}{\partial x}\right)_y
+=-1.
+$$
+
+Jacobian 写法：
+
+$$
+\left(\frac{\partial x}{\partial y}\right)_z
+=
+\frac{\partial(x,z)}{\partial(y,z)}.
+$$
+
+### 二级结论
+
+看到三个变量互相偏导，优先用循环关系。推响应函数恒等式时常用
+
+$$
+\left(\frac{\partial p}{\partial T}\right)_V
+\left(\frac{\partial T}{\partial V}\right)_p
+\left(\frac{\partial V}{\partial p}\right)_T=-1.
+$$
+
+配合
+
+$$
+\left(\frac{\partial V}{\partial T}\right)_p=\alpha V,
+\qquad
+\left(\frac{\partial V}{\partial p}\right)_T=-\kappa_T V,
+$$
+
+立刻得到
+
+$$
+\left(\frac{\partial p}{\partial T}\right)_V=\frac{\alpha}{\kappa_T}.
+$$
+
+## 26. 热力学例题模板
+
+### 例题 11：从 $S(U,V,N)$ 推出温度、压强和化学势
+
+若给出基本方程 $S=S(U,V,N)$，直接写
+
+$$
+dS=S_U\,dU+S_V\,dV+S_N\,dN.
+$$
+
+与
+
+$$
+dS=\frac{1}{T}dU+\frac{p}{T}dV-\frac{\mu}{T}dN
+$$
+
+对比：
+
+$$
+T=\frac{1}{S_U},
+\qquad
+p=T S_V,
+\qquad
+\mu=-T S_N.
+$$
+
+考试跳步答案：
+
+$$
+\frac{1}{T}=\left(\frac{\partial S}{\partial U}\right)_{V,N},
+\quad
+\frac{p}{T}=\left(\frac{\partial S}{\partial V}\right)_{U,N},
+\quad
+-\frac{\mu}{T}=\left(\frac{\partial S}{\partial N}\right)_{U,V}.
+$$
+
+### 例题 12：由 $F(T,V)$ 推状态方程和熵
+
+给 $F(T,V,N)$，求压强、熵、内能。直接用
+
+$$
+dF=-S\,dT-p\,dV+\mu\,dN.
+$$
+
+因此
+
+$$
+S=-\left(\frac{\partial F}{\partial T}\right)_{V,N},
+\qquad
+p=-\left(\frac{\partial F}{\partial V}\right)_{T,N}.
+$$
+
+内能由 Legendre 反变换：
+
+$$
+U=F+TS.
+$$
+
+若还要热容：
+
+$$
+C_V=T\left(\frac{\partial S}{\partial T}\right)_V
+=-T\left(\frac{\partial^2F}{\partial T^2}\right)_V.
+$$
+
+### 例题 13：推导 Maxwell 关系
+
+题目要求推
+
+$$
+\left(\frac{\partial S}{\partial V}\right)_T
+=
+\left(\frac{\partial p}{\partial T}\right)_V.
+$$
+
+写
+
+$$
+dF=-S\,dT-p\,dV.
+$$
+
+于是
+
+$$
+S=-F_T,
+\qquad
+p=-F_V.
+$$
+
+混合偏导相等：
+
+$$
+\frac{\partial}{\partial V}(-F_T)
+=
+\frac{\partial}{\partial T}(-F_V).
+$$
+
+所以
+
+$$
+\left(\frac{\partial S}{\partial V}\right)_T
+=
+\left(\frac{\partial p}{\partial T}\right)_V.
+$$
+
+### 例题 14：理想气体绝热膨胀
+
+已知初态 $(T_1,V_1)$，可逆绝热到 $V_2$。求 $T_2,p_2,W$。
+
+可逆绝热：
+
+$$
+TV^{\gamma-1}=\text{const}.
+$$
+
+所以
+
+$$
+T_2=T_1\left(\frac{V_1}{V_2}\right)^{\gamma-1}.
+$$
+
+压强：
+
+$$
+p_2=p_1\left(\frac{V_1}{V_2}\right)^\gamma.
+$$
+
+因为 $Q=0$，体系对外做功为
+
+$$
+W=-\Delta U=nC_V(T_1-T_2).
+$$
+
+也可写成
+
+$$
+W=\frac{p_1V_1-p_2V_2}{\gamma-1}.
+$$
+
+### 例题 15：理想气体熵变
+
+从 $(T_1,V_1)$ 到 $(T_2,V_2)$：
+
+$$
+\Delta S
+=nC_V\ln\frac{T_2}{T_1}
++nR\ln\frac{V_2}{V_1}.
+$$
+
+若题目给的是 $(T,p)$：
+
+$$
+\Delta S
+=nC_p\ln\frac{T_2}{T_1}
+-nR\ln\frac{p_2}{p_1}.
+$$
+
+自由膨胀且理想气体温度不变：
+
+$$
+\Delta S=nR\ln\frac{V_2}{V_1}.
+$$
+
+### 例题 16：证明 $C_p-C_V=TV\alpha^2/\kappa_T$
+
+先写
+
+$$
+C_p-C_V=
+T\left(\frac{\partial p}{\partial T}\right)_V
+\left(\frac{\partial V}{\partial T}\right)_p.
+$$
+
+代入
+
+$$
+\left(\frac{\partial V}{\partial T}\right)_p=\alpha V.
+$$
+
+由循环关系得
+
+$$
+\left(\frac{\partial p}{\partial T}\right)_V=\frac{\alpha}{\kappa_T}.
+$$
+
+所以
+
+$$
+C_p-C_V=T\frac{\alpha}{\kappa_T}\alpha V
+=\frac{TV\alpha^2}{\kappa_T}.
+$$
+
+理想气体中 $\alpha=1/T$，$\kappa_T=1/p$，代入：
+
+$$
+C_p-C_V=\frac{TV(1/T^2)}{1/p}=\frac{pV}{T}=nR.
+$$
+
+### 例题 17：Carnot 热机效率
+
+热机在 $T_h$ 吸热 $Q_h$，在 $T_c$ 放热 $Q_c$。可逆循环熵变为零：
+
+$$
+\frac{Q_h}{T_h}-\frac{Q_c}{T_c}=0.
+$$
+
+所以
+
+$$
+\frac{Q_c}{Q_h}=\frac{T_c}{T_h}.
+$$
+
+效率
+
+$$
+\eta=\frac{Q_h-Q_c}{Q_h}
+=1-\frac{T_c}{T_h}.
+$$
+
+若问“是否可能”，用
+
+$$
+\eta\le 1-\frac{T_c}{T_h}
+$$
+
+检查。
+
+### 例题 18：Clapeyron 方程算相界斜率
+
+已知相变潜热 $L$，两相摩尔体积差 $\Delta v$，相变温度 $T$。相界斜率：
+
+$$
+\frac{dp}{dT}=\frac{L}{T\Delta v}.
+$$
+
+若是液-气相变且气体理想：
+
+$$
+\Delta v\simeq v_g=\frac{RT}{p}.
+$$
+
+于是
+
+$$
+\frac{dp}{dT}=\frac{Lp}{RT^2}.
+$$
+
+积分：
+
+$$
+\ln\frac{p_2}{p_1}
+=-\frac{L}{R}\left(\frac{1}{T_2}-\frac{1}{T_1}\right).
+$$
+
+### 例题 19：van der Waals 临界点
+
+状态方程：
+
+$$
+p=\frac{RT}{v-b}-\frac{a}{v^2}.
+$$
+
+临界条件：
+
+$$
+p_v=0,
+\qquad
+p_{vv}=0.
+$$
+
+计算：
+
+$$
+-\frac{RT}{(v-b)^2}+\frac{2a}{v^3}=0,
+$$
+
+$$
+\frac{2RT}{(v-b)^3}-\frac{6a}{v^4}=0.
+$$
+
+两式相除得 $v_c=3b$，代回得
+
+$$
+T_c=\frac{8a}{27Rb},
+\qquad
+p_c=\frac{a}{27b^2}.
+$$
+
+### 例题 20：Gibbs 相律判断自由度
+
+公式：
+
+$$
+f=C-P+2.
+$$
+
+单组分一相：
+
+$$
+f=1-1+2=2,
+$$
+
+可独立改变 $T,p$。
+
+单组分两相共存：
+
+$$
+f=1-2+2=1,
+$$
+
+只需给定 $T$ 或 $p$，另一个由相界决定。
+
+单组分三相点：
+
+$$
+f=1-3+2=0,
+$$
+
+$T,p$ 都不能自由选。
+
+### 例题 21：Joule-Thomson 系数判断升温降温
+
+节流过程：
+
+$$
+dH=0.
+$$
+
+通式：
+
+$$
+\mu_{JT}
+=\frac{1}{C_p}
+\left[
+T\left(\frac{\partial V}{\partial T}\right)_p-V
+\right].
+$$
+
+若给 $\alpha$：
+
+$$
+\mu_{JT}=\frac{V}{C_p}(T\alpha-1).
+$$
+
+判断：
+
+$$
+\mu_{JT}>0 \Rightarrow \text{降压降温},
+\qquad
+\mu_{JT}<0 \Rightarrow \text{降压升温}.
+$$
+
+理想气体 $\alpha=1/T$，所以 $\mu_{JT}=0$。
+
+### 例题 22：化学平衡条件
+
+反应
+
+$$
+aA+bB\rightleftharpoons cC+dD.
+$$
+
+用计量数写
+
+$$
+\nu_A=-a,
+\quad
+\nu_B=-b,
+\quad
+\nu_C=c,
+\quad
+\nu_D=d.
+$$
+
+恒温恒压下
+
+$$
+dG=\sum_i\mu_i\,dN_i
+=\left(\sum_i\nu_i\mu_i\right)d\xi.
+$$
+
+平衡：
+
+$$
+\sum_i\nu_i\mu_i=0.
+$$
+
+即
+
+$$
+c\mu_C+d\mu_D-a\mu_A-b\mu_B=0.
+$$
+
+若写成反应 Gibbs 自由能：
+
+$$
+\Delta_rG=\Delta_rG^\circ+RT\ln Q.
+$$
+
+平衡时 $\Delta_rG=0$，所以
+
+$$
+\Delta_rG^\circ=-RT\ln K.
+$$
+
+## 27. PDF 对照补强：易混符号、判据与经典推导
+
+这一节专门对应复习大纲里容易“看起来都认识、考试时分不清”的项目：$P,Z,F,f,\Phi,\Omega,\Xi$，三种判据，第二定律两种表述等价，以及从概率分布出发推系综。
+
+### 27.1 $P,Z,F,f,\Phi,\Omega,\Xi$ 一次分清
+
+| 符号 | 名字 | 出现场景 | 定义 | 直接给出的量 |
+|---|---|---|---|---|
+| $P_i$ | 微观态概率 | 任意系综 | 第 $i$ 个微观态出现的概率 | 归一化：$\sum_iP_i=1$ |
+| $\Omega$ | 态数 | 微正则 | 固定 $E,V,N$ 的可及态数 | $S=k_B\ln\Omega$ |
+| $Z$ | 正则配分函数 | 正则 | $Z=\sum_i e^{-\beta E_i}$ | $F=-k_BT\ln Z$ |
+| $F$ | Helmholtz 自由能 | 正则/热力学 | $F=U-TS$ | $dF=-S\,dT-p\,dV+\mu\,dN$ |
+| $f$ | 自由能密度或单粒子自由能 | 相变/场论 | 常见 $f=F/V$ 或 $f=F/N$，看题目约定 | Landau 理论常最小化 $f(\phi)$ |
+| $z$ | 逸度 | 巨正则/量子气体 | $z=e^{\beta\mu}$ | BE/FD 分布常写成 $z$ 的形式 |
+| $\Xi$ | 巨正则配分函数 | 巨正则 | $\Xi=\sum_N\sum_i e^{-\beta(E_{i,N}-\mu N)}$ | $\Phi=-k_BT\ln\Xi$ |
+| $\Phi$ 或 $\Omega_G$ | 巨势 | 巨正则 | $\Phi=U-TS-\mu N$ | 均匀体系 $\Phi=-pV$ |
+| $p$ | 压强 | 热力学 | $p=-(\partial F/\partial V)_T$ | 注意小写 $p$ 不是概率 |
+| $P$ | 概率或压强 | 依教材记号 | 若带下标 $P_i$ 多为概率；若写 $pV=nRT$ 是压强 | 考试先看上下文 |
+
+记忆线：
+
+$$
+\boxed{\Omega\to S},
+\qquad
+\boxed{Z\to F},
+\qquad
+\boxed{\Xi\to \Phi},
+\qquad
+\boxed{f\text{ 通常是 }F\text{ 的密度}}.
+$$
+
+三个系综的“概率-归一化-特性函数”完整链条：
+
+$$
+\text{微正则：}
+\quad
+P_i=\frac{1}{\Omega},
+\quad
+\sum_{i\in E}P_i=1,
+\quad
+S=k_B\ln\Omega.
+$$
+
+$$
+\text{正则：}
+\quad
+P_i=\frac{e^{-\beta E_i}}{Z},
+\quad
+Z=\sum_i e^{-\beta E_i},
+\quad
+F=-k_BT\ln Z.
+$$
+
+$$
+\text{巨正则：}
+\quad
+P_{i,N}=\frac{e^{-\beta(E_{i,N}-\mu N)}}{\Xi},
+\quad
+\Xi=\sum_N\sum_i e^{-\beta(E_{i,N}-\mu N)},
+\quad
+\Phi=-k_BT\ln\Xi=-pV.
+$$
+
+### 27.2 从 Shannon 熵最大推出正则系综
+
+如果题目说“从分布定义出发推正则分布”，用最大熵法最稳。目标是在约束
+
+$$
+\sum_iP_i=1,
+\qquad
+\sum_iP_iE_i=U
+$$
+
+下最大化
+
+$$
+S=-k_B\sum_iP_i\ln P_i.
+$$
+
+构造 Lagrange 函数：
+
+$$
+\mathcal L=-k_B\sum_iP_i\ln P_i
+-\alpha\left(\sum_iP_i-1\right)
+-\lambda\left(\sum_iP_iE_i-U\right).
+$$
+
+对 $P_i$ 变分：
+
+$$
+\frac{\partial\mathcal L}{\partial P_i}
+=-k_B(\ln P_i+1)-\alpha-\lambda E_i=0.
+$$
+
+因此
+
+$$
+P_i=Ae^{-\lambda E_i/k_B}.
+$$
+
+令
+
+$$
+\beta=\frac{\lambda}{k_B}=\frac{1}{k_BT},
+\qquad
+A=\frac{1}{Z},
+$$
+
+就得到
+
+$$
+P_i=\frac{e^{-\beta E_i}}{Z},
+\qquad
+Z=\sum_i e^{-\beta E_i}.
+$$
+
+再把 $P_i$ 代回熵：
+
+$$
+S=-k_B\sum_iP_i(-\beta E_i-\ln Z)
+=k_B\ln Z+k_B\beta U.
+$$
+
+于是
+
+$$
+F=U-TS=-k_BT\ln Z.
+$$
+
+考试跳步：
+
+$$
+Z\Rightarrow F,
+\qquad
+U=-\partial_\beta\ln Z,
+\qquad
+S=k_B(\ln Z+\beta U),
+\qquad
+C_V=k_B\beta^2\langle(\Delta E)^2\rangle.
+$$
+
+### 27.3 从最大熵推出巨正则系综
+
+巨正则多一个平均粒子数约束：
+
+$$
+\sum_{i,N}P_{i,N}=1,
+\quad
+\sum_{i,N}P_{i,N}E_{i,N}=U,
+\quad
+\sum_{i,N}P_{i,N}N=N_0.
+$$
+
+最大化 Shannon 熵后得到
+
+$$
+P_{i,N}\propto e^{-\beta E_{i,N}+\gamma N}.
+$$
+
+令 $\gamma=\beta\mu$：
+
+$$
+P_{i,N}=\frac{e^{-\beta(E_{i,N}-\mu N)}}{\Xi},
+\qquad
+\Xi=\sum_N\sum_i e^{-\beta(E_{i,N}-\mu N)}.
+$$
+
+巨势：
+
+$$
+\Phi=U-TS-\mu N=-k_BT\ln\Xi.
+$$
+
+均匀大体系中：
+
+$$
+\Phi=-pV,
+\qquad
+p=\frac{k_BT}{V}\ln\Xi.
+$$
+
+涨落公式：
+
+$$
+\langle(\Delta N)^2\rangle
+=k_BT\left(\frac{\partial N}{\partial\mu}\right)_{T,V},
+$$
+
+$$
+\langle(\Delta E)^2\rangle
+=-\left(\frac{\partial U}{\partial\beta}\right)_{\beta\mu,V}
+\quad(\text{固定 }\beta\mu\text{ 的写法最干净}).
+$$
+
+### 27.4 热力学判据一张表
+
+| 固定条件 | 自发方向 | 平衡条件 | 适合题型 |
+|---|---|---|---|
+| 孤立：$U,V,N$ | $\Delta S>0$ | $S$ 最大 | 热接触、不可逆过程 |
+| $S,V,N$ | $\Delta U<0$ | $U$ 最小 | 绝热约束下的力学平衡 |
+| $T,V,N$ | $\Delta F<0$ | $F$ 最小 | 正则系综、等温容器 |
+| $T,p,N$ | $\Delta G<0$ | $G$ 最小 | 化学反应、相平衡 |
+| $T,V,\mu$ | $\Delta\Phi<0$ | $\Phi$ 最小 | 巨正则、开放体系 |
+
+从热力学势看“谁是特性函数”：自然变量给定后，势函数的全微分直接给出所有热力学量。
+
+$$
+S=S(U,V,N):
+\quad
+\frac{1}{T}=S_U,
+\quad
+\frac{p}{T}=S_V,
+\quad
+-\frac{\mu}{T}=S_N.
+$$
+
+$$
+F=F(T,V,N):
+\quad
+S=-F_T,
+\quad
+p=-F_V,
+\quad
+\mu=F_N.
+$$
+
+$$
+\Phi=\Phi(T,V,\mu):
+\quad
+S=-\Phi_T,
+\quad
+p=-\Phi_V,
+\quad
+N=-\Phi_\mu.
+$$
+
+最后一行来自
+
+$$
+d\Phi=-S\,dT-p\,dV-N\,d\mu.
+$$
+
+## 28. 第二定律两种表述等价与第三定律
+
+### 28.1 Kelvin-Planck（开尔文-普朗克）表述
+
+Kelvin-Planck（开尔文-普朗克）表述：不可能制造一种循环工作的热机，其唯一效果是从单一热源吸热并把它完全转化为功。
+
+数学化：若热机只接触一个热源 $T$，循环后 $\Delta U=0$，则不可能有
+
+$$
+Q>0,
+\qquad
+W=Q.
+$$
+
+否则就是第二类永动机。
+
+### 28.2 Clausius（克劳修斯）表述
+
+Clausius（克劳修斯）表述：不可能制造一种循环装置，其唯一效果是把热量从低温热源传到高温热源。
+
+数学化：不可能在没有外界做功或其他影响时实现
+
+$$
+Q_c>0\text{ 从 }T_c\text{ 取出},
+\qquad
+Q_h=Q_c\text{ 送入 }T_h,
+\qquad
+T_h>T_c.
+$$
+
+### 28.3 等价性证明：Clausius 违背推出 Kelvin 违背
+
+假设 Clausius 表述错了：存在一台“无功制冷机”，能把 $Q_c$ 从低温 $T_c$ 搬到高温 $T_h$，且不产生其他影响。
+
+再取一台普通热机，从高温热源吸热 $Q_h$，向低温热源放热 $Q_c$，输出功
+
+$$
+W=Q_h-Q_c.
+$$
+
+把无功制冷机和热机组合：低温热源收到热机放出的 $Q_c$，又被无功制冷机取走 $Q_c$，净变化为零。高温热源净损失
+
+$$
+Q_h-Q_c=W.
+$$
+
+外界得到功 $W$。组合装置的唯一效果就是从单一高温热源吸热并完全变成功，违反 Kelvin-Planck 表述。
+
+### 28.4 等价性证明：Kelvin 违背推出 Clausius 违背
+
+假设 Kelvin-Planck 表述错了：存在一台单热源热机，从高温热源吸热 $Q$ 并完全变为功
+
+$$
+W=Q.
+$$
+
+用这份功驱动一台普通制冷机，把热量 $Q_c$ 从低温热源搬到高温热源。制冷机向高温热源放热
+
+$$
+Q_h=Q_c+W=Q_c+Q.
+$$
+
+高温热源同时给单热源热机损失 $Q$，所以高温热源净得到 $Q_c$；低温热源净损失 $Q_c$；外界无净功变化。组合唯一效果就是把热从低温传到高温，违反 Clausius 表述。
+
+所以两种表述等价。
+
+### 28.5 Clausius 不等式与熵增原理
+
+对任意循环：
+
+$$
+\oint\frac{\delta Q}{T}\le 0.
+$$
+
+对从态 $A$ 到态 $B$ 的任意过程，取一条可逆路径 $B\to A$ 闭合：
+
+$$
+\int_A^B\frac{\delta Q}{T}+\int_B^A\frac{\delta Q_{rev}}{T}\le0.
+$$
+
+定义熵变
+
+$$
+\Delta S=S_B-S_A=\int_A^B\frac{\delta Q_{rev}}{T},
+$$
+
+得
+
+$$
+\Delta S\ge \int_A^B\frac{\delta Q}{T}.
+$$
+
+绝热过程 $\delta Q=0$，所以
+
+$$
+\Delta S\ge0.
+$$
+
+这就是熵增原理。
+
+### 28.6 第三定律两种表述
+
+Nernst（能斯特）热定理：当 $T\to0$ 时，任意等温过程的熵变趋于零：
+
+$$
+\lim_{T\to0}\Delta S_T=0.
+$$
+
+Planck（普朗克）表述：完美晶体在绝对零度的熵为零：
+
+$$
+\lim_{T\to0}S=0.
+$$
+
+常用低温结论：若
+
+$$
+C\sim aT^n\quad(n>0),
+$$
+
+则
+
+$$
+S(T)-S(0)=\int_0^T\frac{C(T')}{T'}dT'
+=\frac{a}{n}T^n.
+$$
+
+考试二级结论：第三定律要求低温热容趋于零；有限步过程不能达到 $T=0$。
+
+### 28.7 热力学温标
+
+Carnot 定理说明所有可逆热机在两个热源之间的效率只依赖热源温度：
+
+$$
+\eta_C=1-\frac{Q_c}{Q_h}.
+$$
+
+定义热力学温标为
+
+$$
+\frac{T_c}{T_h}=\frac{Q_c}{Q_h}
+\quad(\text{可逆 Carnot 循环}).
+$$
+
+于是
+
+$$
+\eta_C=1-\frac{T_c}{T_h}.
+$$
+
+这个温标不依赖具体工质，是温度高低的普适定义。
+
+## 29. 典型系统补强：声子、旋子、负温度与降温过程
+
+### 29.1 元激发有效模型：声子与旋子
+
+低温凝聚态常把复杂多体系统化成近独立元激发：
+
+$$
+E=E_0+\sum_{\mathbf k}\epsilon_{\mathbf k}n_{\mathbf k}.
+$$
+
+声子低能色散通常为
+
+$$
+\epsilon_k=\hbar c_s k,
+$$
+
+其中 $c_s$ 是声速。三维声子态密度 $g(\omega)\propto\omega^2$，所以低温热容
+
+$$
+C_V\propto T^3.
+$$
+
+旋子/roton 常用于超流氦的元激发，能谱近似写为
+
+$$
+\epsilon(p)=\Delta+\frac{(p-p_0)^2}{2m^*},
+$$
+
+其中 $\Delta$ 是能隙，$p_0$ 是能量极小处动量，$m^*$ 是有效质量。低温贡献带 Boltzmann 因子：
+
+$$
+C_V^{roton}\propto e^{-\Delta/(k_BT)}
+$$
+
+乘以幂次温度因子。考试中记住：声子无能隙给幂律，旋子有能隙给指数压低。
+
+### 29.2 负温度系统
+
+负温度的必要条件：
+
+1. 能谱有上界。
+2. 系统内部先达到平衡。
+3. 与普通正温热库隔离足够好。
+
+定义仍是
+
+$$
+\frac{1}{T}=\left(\frac{\partial S}{\partial E}\right)_{V,N}.
+$$
+
+若高能态被反常占据，继续加能量反而减少可及态数：
+
+$$
+\frac{\partial S}{\partial E}<0
+\quad\Rightarrow\quad
+T<0.
+$$
+
+二能级自旋系统是标准例子。设能级 $0,\epsilon$，激发粒子数 $n$，态数
+
+$$
+\Omega=\frac{N!}{n!(N-n)!},
+\qquad
+E=n\epsilon.
+$$
+
+用 Stirling 近似：
+
+$$
+S=k_B\ln\Omega.
+$$
+
+可得
+
+$$
+\frac{1}{T}=\frac{k_B}{\epsilon}\ln\frac{N-n}{n}.
+$$
+
+当 $n>N/2$ 时，$T<0$。负温度比任何正温度都“热”，因为能量会从负温体系流向正温体系。
+
+### 29.3 绝热去磁
+
+顺磁盐可用近独立磁矩近似。低温弱相互作用下熵主要依赖比值
+
+$$
+S=S\left(\frac{B}{T}\right).
+$$
+
+可逆绝热过程 $S$ 不变，因此
+
+$$
+\frac{B}{T}=\text{const},
+\qquad
+T\propto B.
+$$
+
+先等温加磁场让体系向热库放热，再隔热减小磁场，温度随 $B$ 降低。这就是绝热去磁降温。
+
+考试二级结论：绝热去磁不是 Joule-Thomson 节流；前者近似等熵，后者等焓且不可逆。
+
+## 30. Ising、平均场、Landau、RG 再补强
+
+### 30.1 Ising 模型的常见推广
+
+基本 Ising：
+
+$$
+H=-J\sum_{\langle ij\rangle}s_is_j-h\sum_i s_i,
+\qquad
+s_i=\pm1.
+$$
+
+常见推广：
+
+- 反铁磁：$J<0$，相邻自旋倾向反平行。
+- 长程相互作用：$J_{ij}$ 不只最近邻。
+- 随机场/随机键：$h_i$ 或 $J_{ij}$ 随位置变化。
+- 晶格气模型：令占据数 $n_i=(s_i+1)/2$，可把气液相变映射到 Ising 普适类。
+- Potts 模型：自旋有 $q$ 个取值，二维 $q>4$ 时相变可变为一阶。
+
+考试通常不要求细算推广模型，重点写出“序参量、对称性、维数、相互作用范围决定普适类”。
+
+### 30.2 平均场自由能与自洽方程
+
+平均场自洽方程：
+
+$$
+m=\tanh[\beta(zJm+h)].
+$$
+
+对应的平均场自由能可写成
+
+$$
+f(m)=\frac{1}{2}zJm^2-k_BT\ln\left[2\cosh\beta(zJm+h)\right].
+$$
+
+平衡条件 $\partial f/\partial m=0$ 给出同一个自洽方程。小 $m$ 展开：
+
+$$
+f(m)=f_0+\frac{1}{2}a(T-T_c)m^2+\frac{1}{4}bm^4-hm+\cdots.
+$$
+
+这就是 Landau 形式。二级结论：平均场的本质是假设涨落可忽略，因此高维更准，低维临界点附近失效。
+
+### 30.3 Landau 判断一阶/连续相变
+
+若
+
+$$
+f=f_0+a_2(T)m^2+a_4m^4+a_6m^6,
+\qquad
+a_6>0,
+$$
+
+则：
+
+- $a_4>0$ 且 $a_2$ 过零：连续相变。
+- $a_4<0$ 且 $a_6>0$：可能一阶相变。
+- 三临界点常由 $a_2=0,a_4=0$ 定位。
+
+考试跳步：连续相变看二次项变号；一阶相变看两个局域极小自由能相等。
+
+### 30.4 Kadanoff RG 与自由能 RG
+
+Kadanoff 粗粒化：把边长 $b$ 的块看成一个新自由度，长度变换
+
+$$
+\mathbf r'=\mathbf r/b.
+$$
+
+耦合常数变换
+
+$$
+K'=R_b(K).
+$$
+
+不动点满足
+
+$$
+K^*=R_b(K^*).
+$$
+
+自由能奇异部分满足标度变换：
+
+$$
+f_s(t,h)=b^{-d}f_s(b^{y_t}t,b^{y_h}h).
+$$
+
+关联长度满足
+
+$$
+\xi(t,h)=b\,\xi(b^{y_t}t,b^{y_h}h).
+$$
+
+令 $h=0$，取 $b=|t|^{-1/y_t}$：
+
+$$
+\xi\sim |t|^{-1/y_t},
+\qquad
+\nu=\frac{1}{y_t}.
+$$
+
+令自由能变换同样取 $b=|t|^{-1/y_t}$：
+
+$$
+f_s(t,0)\sim |t|^{d/y_t}=|t|^{d\nu}.
+$$
+
+若 hyperscaling 成立，由 $C\sim \partial_T^2 f_s\sim |t|^{-\alpha}$ 得
+
+$$
+2-\alpha=d\nu.
+$$
+
+四个常用标度律：
+
+$$
+\alpha+2\beta_m+\gamma=2 \quad \text{Rushbrooke},
+$$
+
+$$
+\gamma=\beta_m(\delta-1) \quad \text{Widom},
+$$
+
+$$
+\gamma=\nu(2-\eta) \quad \text{Fisher},
+$$
+
+$$
+2-\alpha=d\nu \quad \text{Hyperscaling}.
+$$
+
+## 31. PDF 覆盖检查表
+
+| PDF 条目 | 页面覆盖位置 |
+|---|---|
+| 微观状态、等几率、相空间、熵与 Shannon 熵 | 1, 27 |
+| 微正则、正则、巨正则、涨落、特性函数 | 2, 27 |
+| Maxwell 分布、Boltzmann 分布、能均分 | 3 |
+| BE/FD 分布、BEC、Fermi 面、量子修正 | 4-7 |
+| 光子气体、固体热容、声子、旋子、负温度 | 8, 29 |
+| Ising、平均场、Landau、Gaussian、RG、标度律 | 9-11, 30 |
+| 热力学第零/一/二/三定律、热力学温标 | 14, 28 |
+| 熵判据、内能判据、自由能判据、Gibbs 判据 | 14, 27 |
+| 热力学势、焓、巨势、Maxwell 关系 | 15, 27 |
+| Clapeyron、Ehrenfest、相图、Gibbs 相律 | 20, 24, 26 |
+| 单元/多元复相平衡、化学平衡 | 16, 20, 22, 26 |
+| 理想气体、非理想气体、van der Waals | 18, 21 |
+| 卡诺循环、制冷机、节流、绝热去磁 | 19, 23, 29 |
