@@ -1,0 +1,36 @@
+{
+  "name": "better-fudan-physics-guide",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "开放、共享、协作的大学物理知识库。",
+  "scripts": {
+    "docs:dev": "npm run generate && vitepress dev docs --host 0.0.0.0",
+    "docs:build": "npm run generate && vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "generate": "npm run generate:downloads && npm run generate:index && npm run generate:sitemap && npm run generate:rss",
+    "generate:index": "tsx scripts/generate-index.ts",
+    "generate:downloads": "tsx scripts/generate-downloads.ts",
+    "generate:sitemap": "tsx scripts/generate-sitemap.ts",
+    "generate:rss": "tsx scripts/generate-rss.ts",
+    "check": "npm run docs:build"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue": "^6.0.3",
+    "katex": "^0.16.22",
+    "medium-zoom": "^1.1.0",
+    "mermaid": "^11.16.0",
+    "vite": "^8.1.0",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.39"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "markdown-it-katex": "^2.0.3",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}
