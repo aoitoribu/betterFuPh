@@ -2474,3 +2474,647 @@ $$
 $$
 \Delta_rG^\circ=-RT\ln K.
 $$
+
+## 27. PDF 对照补强：易混符号、判据与经典推导
+
+这一节专门对应复习大纲里容易“看起来都认识、考试时分不清”的项目：$P,Z,F,f,\Phi,\Omega,\Xi$，三种判据，第二定律两种表述等价，以及从概率分布出发推系综。
+
+### 27.1 $P,Z,F,f,\Phi,\Omega,\Xi$ 一次分清
+
+| 符号 | 名字 | 出现场景 | 定义 | 直接给出的量 |
+|---|---|---|---|---|
+| $P_i$ | 微观态概率 | 任意系综 | 第 $i$ 个微观态出现的概率 | 归一化：$\sum_iP_i=1$ |
+| $\Omega$ | 态数 | 微正则 | 固定 $E,V,N$ 的可及态数 | $S=k_B\ln\Omega$ |
+| $Z$ | 正则配分函数 | 正则 | $Z=\sum_i e^{-\beta E_i}$ | $F=-k_BT\ln Z$ |
+| $F$ | Helmholtz 自由能 | 正则/热力学 | $F=U-TS$ | $dF=-S\,dT-p\,dV+\mu\,dN$ |
+| $f$ | 自由能密度或单粒子自由能 | 相变/场论 | 常见 $f=F/V$ 或 $f=F/N$，看题目约定 | Landau 理论常最小化 $f(\phi)$ |
+| $z$ | 逸度 | 巨正则/量子气体 | $z=e^{\beta\mu}$ | BE/FD 分布常写成 $z$ 的形式 |
+| $\Xi$ | 巨正则配分函数 | 巨正则 | $\Xi=\sum_N\sum_i e^{-\beta(E_{i,N}-\mu N)}$ | $\Phi=-k_BT\ln\Xi$ |
+| $\Phi$ 或 $\Omega_G$ | 巨势 | 巨正则 | $\Phi=U-TS-\mu N$ | 均匀体系 $\Phi=-pV$ |
+| $p$ | 压强 | 热力学 | $p=-(\partial F/\partial V)_T$ | 注意小写 $p$ 不是概率 |
+| $P$ | 概率或压强 | 依教材记号 | 若带下标 $P_i$ 多为概率；若写 $pV=nRT$ 是压强 | 考试先看上下文 |
+
+记忆线：
+
+$$
+\boxed{\Omega\to S},
+\qquad
+\boxed{Z\to F},
+\qquad
+\boxed{\Xi\to \Phi},
+\qquad
+\boxed{f\text{ 通常是 }F\text{ 的密度}}.
+$$
+
+三个系综的“概率-归一化-特性函数”完整链条：
+
+$$
+\text{微正则：}
+\quad
+P_i=\frac{1}{\Omega},
+\quad
+\sum_{i\in E}P_i=1,
+\quad
+S=k_B\ln\Omega.
+$$
+
+$$
+\text{正则：}
+\quad
+P_i=\frac{e^{-\beta E_i}}{Z},
+\quad
+Z=\sum_i e^{-\beta E_i},
+\quad
+F=-k_BT\ln Z.
+$$
+
+$$
+\text{巨正则：}
+\quad
+P_{i,N}=\frac{e^{-\beta(E_{i,N}-\mu N)}}{\Xi},
+\quad
+\Xi=\sum_N\sum_i e^{-\beta(E_{i,N}-\mu N)},
+\quad
+\Phi=-k_BT\ln\Xi=-pV.
+$$
+
+### 27.2 从 Shannon 熵最大推出正则系综
+
+如果题目说“从分布定义出发推正则分布”，用最大熵法最稳。目标是在约束
+
+$$
+\sum_iP_i=1,
+\qquad
+\sum_iP_iE_i=U
+$$
+
+下最大化
+
+$$
+S=-k_B\sum_iP_i\ln P_i.
+$$
+
+构造 Lagrange 函数：
+
+$$
+\mathcal L=-k_B\sum_iP_i\ln P_i
+-\alpha\left(\sum_iP_i-1\right)
+-\lambda\left(\sum_iP_iE_i-U\right).
+$$
+
+对 $P_i$ 变分：
+
+$$
+\frac{\partial\mathcal L}{\partial P_i}
+=-k_B(\ln P_i+1)-\alpha-\lambda E_i=0.
+$$
+
+因此
+
+$$
+P_i=Ae^{-\lambda E_i/k_B}.
+$$
+
+令
+
+$$
+\beta=\frac{\lambda}{k_B}=\frac{1}{k_BT},
+\qquad
+A=\frac{1}{Z},
+$$
+
+就得到
+
+$$
+P_i=\frac{e^{-\beta E_i}}{Z},
+\qquad
+Z=\sum_i e^{-\beta E_i}.
+$$
+
+再把 $P_i$ 代回熵：
+
+$$
+S=-k_B\sum_iP_i(-\beta E_i-\ln Z)
+=k_B\ln Z+k_B\beta U.
+$$
+
+于是
+
+$$
+F=U-TS=-k_BT\ln Z.
+$$
+
+考试跳步：
+
+$$
+Z\Rightarrow F,
+\qquad
+U=-\partial_\beta\ln Z,
+\qquad
+S=k_B(\ln Z+\beta U),
+\qquad
+C_V=k_B\beta^2\langle(\Delta E)^2\rangle.
+$$
+
+### 27.3 从最大熵推出巨正则系综
+
+巨正则多一个平均粒子数约束：
+
+$$
+\sum_{i,N}P_{i,N}=1,
+\quad
+\sum_{i,N}P_{i,N}E_{i,N}=U,
+\quad
+\sum_{i,N}P_{i,N}N=N_0.
+$$
+
+最大化 Shannon 熵后得到
+
+$$
+P_{i,N}\propto e^{-\beta E_{i,N}+\gamma N}.
+$$
+
+令 $\gamma=\beta\mu$：
+
+$$
+P_{i,N}=\frac{e^{-\beta(E_{i,N}-\mu N)}}{\Xi},
+\qquad
+\Xi=\sum_N\sum_i e^{-\beta(E_{i,N}-\mu N)}.
+$$
+
+巨势：
+
+$$
+\Phi=U-TS-\mu N=-k_BT\ln\Xi.
+$$
+
+均匀大体系中：
+
+$$
+\Phi=-pV,
+\qquad
+p=\frac{k_BT}{V}\ln\Xi.
+$$
+
+涨落公式：
+
+$$
+\langle(\Delta N)^2\rangle
+=k_BT\left(\frac{\partial N}{\partial\mu}\right)_{T,V},
+$$
+
+$$
+\langle(\Delta E)^2\rangle
+=-\left(\frac{\partial U}{\partial\beta}\right)_{\beta\mu,V}
+\quad(\text{固定 }\beta\mu\text{ 的写法最干净}).
+$$
+
+### 27.4 热力学判据一张表
+
+| 固定条件 | 自发方向 | 平衡条件 | 适合题型 |
+|---|---|---|---|
+| 孤立：$U,V,N$ | $\Delta S>0$ | $S$ 最大 | 热接触、不可逆过程 |
+| $S,V,N$ | $\Delta U<0$ | $U$ 最小 | 绝热约束下的力学平衡 |
+| $T,V,N$ | $\Delta F<0$ | $F$ 最小 | 正则系综、等温容器 |
+| $T,p,N$ | $\Delta G<0$ | $G$ 最小 | 化学反应、相平衡 |
+| $T,V,\mu$ | $\Delta\Phi<0$ | $\Phi$ 最小 | 巨正则、开放体系 |
+
+从热力学势看“谁是特性函数”：自然变量给定后，势函数的全微分直接给出所有热力学量。
+
+$$
+S=S(U,V,N):
+\quad
+\frac{1}{T}=S_U,
+\quad
+\frac{p}{T}=S_V,
+\quad
+-\frac{\mu}{T}=S_N.
+$$
+
+$$
+F=F(T,V,N):
+\quad
+S=-F_T,
+\quad
+p=-F_V,
+\quad
+\mu=F_N.
+$$
+
+$$
+\Phi=\Phi(T,V,\mu):
+\quad
+S=-\Phi_T,
+\quad
+p=-\Phi_V,
+\quad
+N=-\Phi_\mu.
+$$
+
+最后一行来自
+
+$$
+d\Phi=-S\,dT-p\,dV-N\,d\mu.
+$$
+
+## 28. 第二定律两种表述等价与第三定律
+
+### 28.1 Kelvin-Planck（开尔文-普朗克）表述
+
+Kelvin-Planck（开尔文-普朗克）表述：不可能制造一种循环工作的热机，其唯一效果是从单一热源吸热并把它完全转化为功。
+
+数学化：若热机只接触一个热源 $T$，循环后 $\Delta U=0$，则不可能有
+
+$$
+Q>0,
+\qquad
+W=Q.
+$$
+
+否则就是第二类永动机。
+
+### 28.2 Clausius（克劳修斯）表述
+
+Clausius（克劳修斯）表述：不可能制造一种循环装置，其唯一效果是把热量从低温热源传到高温热源。
+
+数学化：不可能在没有外界做功或其他影响时实现
+
+$$
+Q_c>0\text{ 从 }T_c\text{ 取出},
+\qquad
+Q_h=Q_c\text{ 送入 }T_h,
+\qquad
+T_h>T_c.
+$$
+
+### 28.3 等价性证明：Clausius 违背推出 Kelvin 违背
+
+假设 Clausius 表述错了：存在一台“无功制冷机”，能把 $Q_c$ 从低温 $T_c$ 搬到高温 $T_h$，且不产生其他影响。
+
+再取一台普通热机，从高温热源吸热 $Q_h$，向低温热源放热 $Q_c$，输出功
+
+$$
+W=Q_h-Q_c.
+$$
+
+把无功制冷机和热机组合：低温热源收到热机放出的 $Q_c$，又被无功制冷机取走 $Q_c$，净变化为零。高温热源净损失
+
+$$
+Q_h-Q_c=W.
+$$
+
+外界得到功 $W$。组合装置的唯一效果就是从单一高温热源吸热并完全变成功，违反 Kelvin-Planck 表述。
+
+### 28.4 等价性证明：Kelvin 违背推出 Clausius 违背
+
+假设 Kelvin-Planck 表述错了：存在一台单热源热机，从高温热源吸热 $Q$ 并完全变为功
+
+$$
+W=Q.
+$$
+
+用这份功驱动一台普通制冷机，把热量 $Q_c$ 从低温热源搬到高温热源。制冷机向高温热源放热
+
+$$
+Q_h=Q_c+W=Q_c+Q.
+$$
+
+高温热源同时给单热源热机损失 $Q$，所以高温热源净得到 $Q_c$；低温热源净损失 $Q_c$；外界无净功变化。组合唯一效果就是把热从低温传到高温，违反 Clausius 表述。
+
+所以两种表述等价。
+
+### 28.5 Clausius 不等式与熵增原理
+
+对任意循环：
+
+$$
+\oint\frac{\delta Q}{T}\le 0.
+$$
+
+对从态 $A$ 到态 $B$ 的任意过程，取一条可逆路径 $B\to A$ 闭合：
+
+$$
+\int_A^B\frac{\delta Q}{T}+\int_B^A\frac{\delta Q_{rev}}{T}\le0.
+$$
+
+定义熵变
+
+$$
+\Delta S=S_B-S_A=\int_A^B\frac{\delta Q_{rev}}{T},
+$$
+
+得
+
+$$
+\Delta S\ge \int_A^B\frac{\delta Q}{T}.
+$$
+
+绝热过程 $\delta Q=0$，所以
+
+$$
+\Delta S\ge0.
+$$
+
+这就是熵增原理。
+
+### 28.6 第三定律两种表述
+
+Nernst（能斯特）热定理：当 $T\to0$ 时，任意等温过程的熵变趋于零：
+
+$$
+\lim_{T\to0}\Delta S_T=0.
+$$
+
+Planck（普朗克）表述：完美晶体在绝对零度的熵为零：
+
+$$
+\lim_{T\to0}S=0.
+$$
+
+常用低温结论：若
+
+$$
+C\sim aT^n\quad(n>0),
+$$
+
+则
+
+$$
+S(T)-S(0)=\int_0^T\frac{C(T')}{T'}dT'
+=\frac{a}{n}T^n.
+$$
+
+考试二级结论：第三定律要求低温热容趋于零；有限步过程不能达到 $T=0$。
+
+### 28.7 热力学温标
+
+Carnot 定理说明所有可逆热机在两个热源之间的效率只依赖热源温度：
+
+$$
+\eta_C=1-\frac{Q_c}{Q_h}.
+$$
+
+定义热力学温标为
+
+$$
+\frac{T_c}{T_h}=\frac{Q_c}{Q_h}
+\quad(\text{可逆 Carnot 循环}).
+$$
+
+于是
+
+$$
+\eta_C=1-\frac{T_c}{T_h}.
+$$
+
+这个温标不依赖具体工质，是温度高低的普适定义。
+
+## 29. 典型系统补强：声子、旋子、负温度与降温过程
+
+### 29.1 元激发有效模型：声子与旋子
+
+低温凝聚态常把复杂多体系统化成近独立元激发：
+
+$$
+E=E_0+\sum_{\mathbf k}\epsilon_{\mathbf k}n_{\mathbf k}.
+$$
+
+声子低能色散通常为
+
+$$
+\epsilon_k=\hbar c_s k,
+$$
+
+其中 $c_s$ 是声速。三维声子态密度 $g(\omega)\propto\omega^2$，所以低温热容
+
+$$
+C_V\propto T^3.
+$$
+
+旋子/roton 常用于超流氦的元激发，能谱近似写为
+
+$$
+\epsilon(p)=\Delta+\frac{(p-p_0)^2}{2m^*},
+$$
+
+其中 $\Delta$ 是能隙，$p_0$ 是能量极小处动量，$m^*$ 是有效质量。低温贡献带 Boltzmann 因子：
+
+$$
+C_V^{roton}\propto e^{-\Delta/(k_BT)}
+$$
+
+乘以幂次温度因子。考试中记住：声子无能隙给幂律，旋子有能隙给指数压低。
+
+### 29.2 负温度系统
+
+负温度的必要条件：
+
+1. 能谱有上界。
+2. 系统内部先达到平衡。
+3. 与普通正温热库隔离足够好。
+
+定义仍是
+
+$$
+\frac{1}{T}=\left(\frac{\partial S}{\partial E}\right)_{V,N}.
+$$
+
+若高能态被反常占据，继续加能量反而减少可及态数：
+
+$$
+\frac{\partial S}{\partial E}<0
+\quad\Rightarrow\quad
+T<0.
+$$
+
+二能级自旋系统是标准例子。设能级 $0,\epsilon$，激发粒子数 $n$，态数
+
+$$
+\Omega=\frac{N!}{n!(N-n)!},
+\qquad
+E=n\epsilon.
+$$
+
+用 Stirling 近似：
+
+$$
+S=k_B\ln\Omega.
+$$
+
+可得
+
+$$
+\frac{1}{T}=\frac{k_B}{\epsilon}\ln\frac{N-n}{n}.
+$$
+
+当 $n>N/2$ 时，$T<0$。负温度比任何正温度都“热”，因为能量会从负温体系流向正温体系。
+
+### 29.3 绝热去磁
+
+顺磁盐可用近独立磁矩近似。低温弱相互作用下熵主要依赖比值
+
+$$
+S=S\left(\frac{B}{T}\right).
+$$
+
+可逆绝热过程 $S$ 不变，因此
+
+$$
+\frac{B}{T}=\text{const},
+\qquad
+T\propto B.
+$$
+
+先等温加磁场让体系向热库放热，再隔热减小磁场，温度随 $B$ 降低。这就是绝热去磁降温。
+
+考试二级结论：绝热去磁不是 Joule-Thomson 节流；前者近似等熵，后者等焓且不可逆。
+
+## 30. Ising、平均场、Landau、RG 再补强
+
+### 30.1 Ising 模型的常见推广
+
+基本 Ising：
+
+$$
+H=-J\sum_{\langle ij\rangle}s_is_j-h\sum_i s_i,
+\qquad
+s_i=\pm1.
+$$
+
+常见推广：
+
+- 反铁磁：$J<0$，相邻自旋倾向反平行。
+- 长程相互作用：$J_{ij}$ 不只最近邻。
+- 随机场/随机键：$h_i$ 或 $J_{ij}$ 随位置变化。
+- 晶格气模型：令占据数 $n_i=(s_i+1)/2$，可把气液相变映射到 Ising 普适类。
+- Potts 模型：自旋有 $q$ 个取值，二维 $q>4$ 时相变可变为一阶。
+
+考试通常不要求细算推广模型，重点写出“序参量、对称性、维数、相互作用范围决定普适类”。
+
+### 30.2 平均场自由能与自洽方程
+
+平均场自洽方程：
+
+$$
+m=\tanh[\beta(zJm+h)].
+$$
+
+对应的平均场自由能可写成
+
+$$
+f(m)=\frac{1}{2}zJm^2-k_BT\ln\left[2\cosh\beta(zJm+h)\right].
+$$
+
+平衡条件 $\partial f/\partial m=0$ 给出同一个自洽方程。小 $m$ 展开：
+
+$$
+f(m)=f_0+\frac{1}{2}a(T-T_c)m^2+\frac{1}{4}bm^4-hm+\cdots.
+$$
+
+这就是 Landau 形式。二级结论：平均场的本质是假设涨落可忽略，因此高维更准，低维临界点附近失效。
+
+### 30.3 Landau 判断一阶/连续相变
+
+若
+
+$$
+f=f_0+a_2(T)m^2+a_4m^4+a_6m^6,
+\qquad
+a_6>0,
+$$
+
+则：
+
+- $a_4>0$ 且 $a_2$ 过零：连续相变。
+- $a_4<0$ 且 $a_6>0$：可能一阶相变。
+- 三临界点常由 $a_2=0,a_4=0$ 定位。
+
+考试跳步：连续相变看二次项变号；一阶相变看两个局域极小自由能相等。
+
+### 30.4 Kadanoff RG 与自由能 RG
+
+Kadanoff 粗粒化：把边长 $b$ 的块看成一个新自由度，长度变换
+
+$$
+\mathbf r'=\mathbf r/b.
+$$
+
+耦合常数变换
+
+$$
+K'=R_b(K).
+$$
+
+不动点满足
+
+$$
+K^*=R_b(K^*).
+$$
+
+自由能奇异部分满足标度变换：
+
+$$
+f_s(t,h)=b^{-d}f_s(b^{y_t}t,b^{y_h}h).
+$$
+
+关联长度满足
+
+$$
+\xi(t,h)=b\,\xi(b^{y_t}t,b^{y_h}h).
+$$
+
+令 $h=0$，取 $b=|t|^{-1/y_t}$：
+
+$$
+\xi\sim |t|^{-1/y_t},
+\qquad
+\nu=\frac{1}{y_t}.
+$$
+
+令自由能变换同样取 $b=|t|^{-1/y_t}$：
+
+$$
+f_s(t,0)\sim |t|^{d/y_t}=|t|^{d\nu}.
+$$
+
+若 hyperscaling 成立，由 $C\sim \partial_T^2 f_s\sim |t|^{-\alpha}$ 得
+
+$$
+2-\alpha=d\nu.
+$$
+
+四个常用标度律：
+
+$$
+\alpha+2\beta_m+\gamma=2 \quad \text{Rushbrooke},
+$$
+
+$$
+\gamma=\beta_m(\delta-1) \quad \text{Widom},
+$$
+
+$$
+\gamma=\nu(2-\eta) \quad \text{Fisher},
+$$
+
+$$
+2-\alpha=d\nu \quad \text{Hyperscaling}.
+$$
+
+## 31. PDF 覆盖检查表
+
+| PDF 条目 | 页面覆盖位置 |
+|---|---|
+| 微观状态、等几率、相空间、熵与 Shannon 熵 | 1, 27 |
+| 微正则、正则、巨正则、涨落、特性函数 | 2, 27 |
+| Maxwell 分布、Boltzmann 分布、能均分 | 3 |
+| BE/FD 分布、BEC、Fermi 面、量子修正 | 4-7 |
+| 光子气体、固体热容、声子、旋子、负温度 | 8, 29 |
+| Ising、平均场、Landau、Gaussian、RG、标度律 | 9-11, 30 |
+| 热力学第零/一/二/三定律、热力学温标 | 14, 28 |
+| 熵判据、内能判据、自由能判据、Gibbs 判据 | 14, 27 |
+| 热力学势、焓、巨势、Maxwell 关系 | 15, 27 |
+| Clapeyron、Ehrenfest、相图、Gibbs 相律 | 20, 24, 26 |
+| 单元/多元复相平衡、化学平衡 | 16, 20, 22, 26 |
+| 理想气体、非理想气体、van der Waals | 18, 21 |
+| 卡诺循环、制冷机、节流、绝热去磁 | 19, 23, 29 |
