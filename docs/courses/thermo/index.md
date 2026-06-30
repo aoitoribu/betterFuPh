@@ -1013,43 +1013,134 @@ $$
 
 ### 例题 9：Landau 理论求临界指数
 
-令 $h=0$：
+从 Landau 自由能出发：
 
 $$
-f=f_0+\frac{a}{2}(T-T_c)\phi^2+\frac{b}{4}\phi^4.
+f=f_0+\frac{a}{2}(T-T_c)\phi^2+\frac{b}{4}\phi^4-h\phi,
+\qquad b>0.
 $$
 
-平衡条件：
+其中 $\phi$ 是序参量，$h$ 是共轭外场，$a,b$ 是正系数。
+
+先令 $h=0$。平衡条件：
 
 $$
-a(T-T_c)\phi+b\phi^3=0.
+\frac{\partial f}{\partial\phi}=a(T-T_c)\phi+b\phi^3=0.
 $$
 
 $T<T_c$ 的非零解：
 
 $$
+\phi^2=\frac{a(T_c-T)}{b},
+\qquad
 \phi=\left[\frac{a(T_c-T)}{b}\right]^{1/2}.
 $$
 
-故
+临界指数 $\beta_m$ 定义为
 
 $$
-\beta_m=\frac{1}{2}.
-$$
-
-$T>T_c$ 且小外场 $h$：
-
-$$
-a(T-T_c)\phi=h,
+\phi\sim (T_c-T)^{\beta_m},
 $$
 
 所以
 
 $$
-\chi=\frac{\partial\phi}{\partial h}=\frac{1}{a(T-T_c)},
-\qquad \gamma=1.
+\beta_m=\frac{1}{2}.
 $$
 
+$T>T_c$ 且小外场 $h$ 时，忽略 $\phi^3$：
+
+$$
+a(T-T_c)\phi=h.
+$$
+
+磁化率或广义响应率
+
+$$
+\chi=\left(\frac{\partial\phi}{\partial h}\right)_{h=0}
+=\frac{1}{a(T-T_c)}.
+$$
+
+临界指数 $\gamma$ 定义为
+
+$$
+\chi\sim |T-T_c|^{-\gamma},
+$$
+
+所以
+
+$$
+\gamma=1.
+$$
+
+临界等温线取 $T=T_c$：
+
+$$
+f=f_0+\frac{b}{4}\phi^4-h\phi.
+$$
+
+平衡条件给
+
+$$
+b\phi^3-h=0,
+\qquad
+\phi=\left(\frac{h}{b}\right)^{1/3}.
+$$
+
+临界指数 $\delta$ 定义为
+
+$$
+\phi\sim h^{1/\delta}\quad(T=T_c),
+$$
+
+因此
+
+$$
+\delta=3.
+$$
+
+比热指数 $\alpha$ 从平衡自由能的奇异部分得到。$T>T_c$ 时 $\phi=0$，可取
+
+$$
+f_{eq}=f_0.
+$$
+
+$T<T_c$ 时把
+
+$$
+\phi^2=\frac{a(T_c-T)}{b}
+$$
+
+代回自由能：
+
+$$
+f_{eq}=f_0-\frac{a^2(T-T_c)^2}{4b}.
+$$
+
+比热奇异性由
+
+$$
+C_{sing}\propto -T\frac{\partial^2 f_{eq}}{\partial T^2}
+$$
+
+控制。因为 $f_{eq}$ 在 $T_c$ 下方是 $(T-T_c)^2$，上方为零，所以 $C$ 只有有限跳变、不发散：
+
+$$
+C_{sing}\sim |t|^0,
+\qquad
+\alpha=0.
+$$
+
+本题四个平均场临界指数汇总：
+
+$$
+\boxed{\beta_m=\frac12,
+\qquad \gamma=1,
+\qquad \delta=3,
+\qquad \alpha=0.}
+$$
+
+注意这里 $\alpha$ 是比热临界指数，不是热膨胀系数；$\beta_m$ 是序参量指数，不是 $1/(k_BT)$。
 ### 例题 10：Saddle point 与 RG 答题模板
 
 若配分函数可写为
