@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="物理学习指南">
+  <rect width="48" height="48" rx="10" fill="#2f5d62"/>
+  <circle cx="24" cy="24" r="4.5" fill="#d6b24c"/>
+  <ellipse cx="24" cy="24" rx="17" ry="7" fill="none" stroke="#f6f3e8" stroke-width="2.5"/>
+  <ellipse cx="24" cy="24" rx="17" ry="7" fill="none" stroke="#f6f3e8" stroke-width="2.5" transform="rotate(60 24 24)"/>
+  <ellipse cx="24" cy="24" rx="17" ry="7" fill="none" stroke="#f6f3e8" stroke-width="2.5" transform="rotate(120 24 24)"/>
+</svg>
