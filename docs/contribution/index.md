@@ -1,4 +1,4 @@
-﻿---
+---
 title: 贡献指南
 ---
 
@@ -9,6 +9,12 @@ title: 贡献指南
 ## 推荐贡献方式
 
 请优先提交 Markdown 文件。Markdown 页面可以直接通过 GitHub Pages 阅读，加载更快，也更容易被搜索、引用和修改。
+
+如果不熟悉 Git，可以先使用 [Markdown 编辑助手](/contribution/editor) 在浏览器里写作。左侧编辑 Markdown，右侧会按本站文档样式实时预览；默认左右比例是 4:6，也可以拖动中间分隔条调整。
+
+提交时推荐使用 GitHub 网页端：在编辑助手里填写目标路径，点击“在 GitHub 新建文件”，GitHub 会引导贡献者 fork 仓库并发起 Pull Request。这样通常只会提交一个 Markdown 文件，维护者审阅也最轻。
+
+备用方式是下载 Markdown 后通过邮件或 Issue 发给维护者，但这种方式需要维护者代为整理文件路径、提交记录和作者说明，更适合临时补充资料。
 
 PDF 仍然接受，适合以下情况：
 
@@ -57,6 +63,12 @@ docs/past-exams/mechanics/2025-final-solution.pdf
 - 代码块请标注语言。
 - 图片放在相邻目录或 `docs/public/assets/` 中。
 - 如果内容来自他人资料，请说明来源和授权情况。
+
+## 评论和讨论
+
+本站使用 Utterances 把页面评论保存到 GitHub Issues。这样评论数据仍然留在 GitHub，不需要额外数据库，也方便把纠错讨论转成 Issue 或 PR。
+
+启用前需要在仓库设置里确认 Issues 已开启，并给仓库安装 [utterances app](https://github.com/apps/utterances)。评论会默认显示在普通文档页底部，配置为 `label: utterance`；如果某个页面不需要评论，在 frontmatter 里加 `comments: false` 即可。
 
 ## 提交 Pull Request 前
 
