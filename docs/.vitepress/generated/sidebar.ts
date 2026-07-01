@@ -149,6 +149,10 @@ export const generatedSidebar: DefaultTheme.Config['sidebar'] = {
       "text": "贡献指南",
       "items": [
         {
+          "text": "Markdown 编辑助手",
+          "link": "/contribution/editor"
+        },
+        {
           "text": "贡献指南",
           "link": "/contribution/"
         }

@@ -1,9 +1,10 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import DefaultTheme from 'vitepress/theme'
 import { nextTick, onMounted, watch } from 'vue'
 import { useRoute } from 'vitepress'
 import mediumZoom from 'medium-zoom'
 import AutoDownloads from './AutoDownloads.vue'
+import UtterancesComments from './UtterancesComments.vue'
 
 const { Layout } = DefaultTheme
 const route = useRoute()
@@ -25,6 +26,7 @@ watch(() => route.path, enableImageZoom)
   <Layout>
     <template #doc-after>
       <AutoDownloads />
+      <UtterancesComments />
     </template>
   </Layout>
 </template>

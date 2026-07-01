@@ -5,7 +5,9 @@ import ContributionPanel from './components/ContributionPanel.vue'
 import DownloadList from './components/DownloadList.vue'
 import FeatureGrid from './components/FeatureGrid.vue'
 import HomeHero from './components/HomeHero.vue'
+import MarkdownEditor from './components/MarkdownEditor.vue'
 import MermaidDiagram from './components/MermaidDiagram.vue'
+import UtterancesComments from './components/UtterancesComments.vue'
 import 'katex/dist/katex.min.css'
 import './styles.css'
 
@@ -17,7 +19,9 @@ const theme: Theme = {
     app.component('DownloadList', DownloadList)
     app.component('FeatureGrid', FeatureGrid)
     app.component('HomeHero', HomeHero)
+    app.component('MarkdownEditor', MarkdownEditor)
     app.component('MermaidDiagram', MermaidDiagram)
+    app.component('UtterancesComments', UtterancesComments)
   }
 }
 
