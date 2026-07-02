@@ -1,4 +1,4 @@
-﻿import { readdir, readFile, stat, writeFile } from 'node:fs/promises'
+import { readdir, readFile, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
 export const docsDir = path.resolve('docs')

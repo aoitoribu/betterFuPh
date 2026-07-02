@@ -6,39 +6,44 @@ import mermaid from 'mermaid'
 import { useData } from 'vitepress'
 
 const repositoryUrl = 'https://github.com/aoitoribu/betterFuPh'
+const markdownSources = import.meta.glob('/**/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true
+}) as Record<string, string>
 
 const starterMarkdown = `---
-title: 页面标题
+title: 新页面标题
 ---
 
-# 页面标题
+# 新页面标题
 
-用一两句话说明这份资料适合谁阅读，以及它补充了哪个课程主题。
+先用一小段话交代这页资料解决什么问题、适合读者在什么时候查阅。
 
-## 核心概念
+## 核心内容
 
-- 第一条要点
-- 第二条要点
-- 可以写行内公式 $E = mc^2$
+- 写清楚主要概念或结论。
+- 给出必要的公式、条件和适用范围。
+- 如果引用教材、讲义或试卷，请在文末说明来源。
 
-## 推导或例题
+## 例题或说明
 
-块级公式会按网站样式显示：
+行内公式可写作 $E = mc^2$，展示公式可写作：
 
 $$
-\\nabla \\cdot \\mathbf{E} = \\frac{\\rho}{\\varepsilon_0}
+\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}
 $$
 
 ## 参考资料
 
-- 课程讲义或教材页码
-- 如果内容来自他人资料，请说明来源和授权情况
+- 教材章节、课程讲义或原始资料链接
 `
 
 const { isDark } = useData()
 const markdown = ref(starterMarkdown)
 const copied = ref('')
 const targetPath = ref('docs/courses/example/new-page.md')
+const sourceStatus = ref('正在准备编辑器')
 const previewRef = ref<HTMLElement | null>(null)
 const editorGridRef = ref<HTMLElement | null>(null)
 const splitPercent = ref(40)
@@ -47,6 +52,25 @@ const isDragging = ref(false)
 const gridStyle = computed<Record<string, string>>(() => ({
   '--editor-source-width': `${splitPercent.value}%`
 }))
+
+const normalizedTargetPath = computed(() => {
+  const value = targetPath.value.trim().replace(/\\/g, '/').replace(/^\/+/, '')
+  return value.endsWith('.md') ? value : `${value}.md`
+})
+
+const sourceKey = computed(() => normalizedTargetPath.value.replace(/^docs\//, '/'))
+const hasBundledSource = computed(() => Object.prototype.hasOwnProperty.call(markdownSources, sourceKey.value))
+const githubEditUrl = computed(() => {
+  const path = normalizedTargetPath.value.replace(/^docs\//, '')
+  return hasBundledSource.value
+    ? `${repositoryUrl}/edit/main/docs/${path}`
+    : `${repositoryUrl}/new/main/docs?filename=${encodeURIComponent(path)}&value=${encodeURIComponent(markdown.value)}`
+})
+
+const downloadUrl = computed(() => {
+  const blob = new Blob([markdown.value], { type: 'text/markdown;charset=utf-8' })
+  return URL.createObjectURL(blob)
+})
 
 function escapeHtml(value: string) {
   return value
@@ -115,6 +139,33 @@ function onSplitterPointerDown(event: PointerEvent) {
   event.preventDefault()
 }
 
+function loadSourceFromPath(path: string) {
+  targetPath.value = path
+  const source = markdownSources[sourceKey.value]
+
+  if (source) {
+    markdown.value = source.replace(/^\uFEFF/, '')
+    sourceStatus.value = `已载入 ${normalizedTargetPath.value}`
+    return
+  }
+
+  markdown.value = starterMarkdown
+  sourceStatus.value = `正在新建 ${normalizedTargetPath.value}`
+}
+
+async function copyText(value: string, label: string) {
+  await navigator.clipboard.writeText(value)
+  copied.value = label
+  window.setTimeout(() => {
+    if (copied.value === label) copied.value = ''
+  }, 1600)
+}
+
+async function submitToGitHub() {
+  await copyText(markdown.value, '内容已复制')
+  window.open(githubEditUrl.value, '_blank', 'noopener,noreferrer')
+}
+
 const renderer = new Renderer()
 
 renderer.text = ({ text }) => renderMathSegments(text)
@@ -127,7 +178,7 @@ renderer.code = ({ text, lang }) => {
   }
 
   const languageClass = language ? ` class="language-${escapeHtml(language)}"` : ''
-  return `<div class="language-${escapeHtml(language || 'text')}"><button title="Copy Code" class="copy"></button><span class="lang">${escapeHtml(language)}</span><pre><code${languageClass}>${escapeHtml(text)}</code></pre></div>`
+  return `<div class="language-${escapeHtml(language || 'text')}"><span class="lang">${escapeHtml(language)}</span><pre><code${languageClass}>${escapeHtml(text)}</code></pre></div>`
 }
 
 renderer.html = ({ text }) => text
@@ -140,28 +191,6 @@ const marked = new Marked({
 })
 
 const previewHtml = computed(() => marked.parse(stripFrontmatter(markdown.value)) as string)
-const downloadUrl = computed(() => {
-  const blob = new Blob([markdown.value], { type: 'text/markdown;charset=utf-8' })
-  return URL.createObjectURL(blob)
-})
-
-const normalizedTargetPath = computed(() => {
-  const value = targetPath.value.trim().replace(/\\/g, '/').replace(/^\/+/, '')
-  return value.endsWith('.md') ? value : `${value}.md`
-})
-
-const githubNewFileUrl = computed(() => {
-  const path = normalizedTargetPath.value.replace(/^docs\//, '')
-  return `${repositoryUrl}/new/main/docs?filename=${encodeURIComponent(path)}&value=${encodeURIComponent(markdown.value)}`
-})
-
-async function copyText(value: string, label: string) {
-  await navigator.clipboard.writeText(value)
-  copied.value = label
-  window.setTimeout(() => {
-    if (copied.value === label) copied.value = ''
-  }, 1600)
-}
 
 async function renderMermaidBlocks() {
   await nextTick()
@@ -189,7 +218,11 @@ async function renderMermaidBlocks() {
   }))
 }
 
-onMounted(renderMermaidBlocks)
+onMounted(() => {
+  const params = new URLSearchParams(window.location.search)
+  loadSourceFromPath(params.get('path') || targetPath.value)
+  void renderMermaidBlocks()
+})
 onBeforeUnmount(stopDrag)
 watch([previewHtml, isDark], renderMermaidBlocks)
 </script>
@@ -198,21 +231,24 @@ watch([previewHtml, isDark], renderMermaidBlocks)
   <section class="markdown-editor-shell">
     <header class="markdown-editor-toolbar">
       <div>
-        <p>编辑助手</p>
+        <p>协作编辑</p>
         <h1>Markdown 实时预览</h1>
+        <small>{{ sourceStatus }}</small>
       </div>
       <div class="markdown-editor-actions" aria-label="提交工具">
         <button type="button" class="home-button" @click="copyText(markdown, '内容已复制')">
           {{ copied === '内容已复制' ? '已复制' : '复制内容' }}
         </button>
         <a class="home-button" :href="downloadUrl" download="contribution.md">下载 Markdown</a>
-        <a class="home-button home-button--primary" :href="githubNewFileUrl" target="_blank" rel="noreferrer">在 GitHub 新建文件</a>
+        <button type="button" class="home-button home-button--primary" @click="submitToGitHub">
+          复制并前往 GitHub 提交
+        </button>
       </div>
     </header>
 
     <div class="markdown-editor-path">
-      <label for="target-path">建议保存路径</label>
-      <input id="target-path" v-model="targetPath" type="text" spellcheck="false">
+      <label for="target-path">文件路径</label>
+      <input id="target-path" v-model="targetPath" type="text" spellcheck="false" @change="loadSourceFromPath(normalizedTargetPath)">
       <button type="button" class="home-button" @click="copyText(normalizedTargetPath, '路径已复制')">
         {{ copied === '路径已复制' ? '已复制' : '复制路径' }}
       </button>
@@ -225,7 +261,7 @@ watch([previewHtml, isDark], renderMermaidBlocks)
       :style="gridStyle"
     >
       <label class="markdown-editor-pane markdown-editor-pane--source">
-        <span>Markdown</span>
+        <span>Markdown 源码</span>
         <textarea v-model="markdown" spellcheck="false" />
       </label>
 

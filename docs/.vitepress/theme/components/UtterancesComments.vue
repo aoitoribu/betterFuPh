@@ -40,8 +40,8 @@ watch(isDark, loadUtterances)
 <template>
   <section v-if="frontmatter.comments !== false" class="utterances-panel" aria-labelledby="utterances-title">
     <div class="utterances-panel__header">
-      <p>椤甸潰璁ㄨ</p>
-      <h2 id="utterances-title">琛ュ厖銆佺籂閿欏拰鎻愰棶</h2>
+      <p>页面讨论</p>
+      <h2 id="utterances-title">补充、纠错和提问</h2>
     </div>
     <div ref="container"></div>
   </section>

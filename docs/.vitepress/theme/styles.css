@@ -594,3 +594,173 @@ body {
     display: none;
   }
 }
+
+/* Bright blue reading theme */
+:root {
+  --vp-c-brand-1: #1463d9;
+  --vp-c-brand-2: #2f8cff;
+  --vp-c-brand-3: #8fd3ff;
+  --vp-c-brand-soft: rgb(47 140 255 / 0.14);
+  --vp-c-bg: #f8fbff;
+  --vp-c-bg-alt: #edf6ff;
+  --vp-c-bg-soft: #eaf5ff;
+  --vp-c-text-1: #14233b;
+  --vp-c-text-2: #4e627d;
+  --physics-c-accent: #f6b73c;
+  --physics-c-coral: #ff7f6e;
+  --physics-c-sky: #3bb7ff;
+}
+
+.dark {
+  --vp-c-brand-1: #8ccaff;
+  --vp-c-brand-2: #5aaeff;
+  --vp-c-brand-3: #1f5da8;
+  --vp-c-brand-soft: rgb(90 174 255 / 0.18);
+  --vp-c-bg: #0c1524;
+  --vp-c-bg-alt: #111e31;
+  --vp-c-bg-soft: #172943;
+  --vp-c-text-1: #eef7ff;
+  --vp-c-text-2: #bed3ea;
+  --physics-c-accent: #ffd166;
+  --physics-c-coral: #ff9a8c;
+  --physics-c-sky: #66c7ff;
+}
+
+.VPNav {
+  background: color-mix(in srgb, var(--vp-c-bg) 86%, transparent);
+  border-bottom: 1px solid rgb(47 140 255 / 0.12);
+}
+
+.home-button {
+  border-color: rgb(47 140 255 / 0.22);
+  background: color-mix(in srgb, var(--vp-c-bg) 82%, white 18%);
+}
+
+.dark .home-button {
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 72%, black 28%);
+}
+
+.home-button:hover {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 10px 26px rgb(20 99 217 / 0.14);
+}
+
+.home-button--primary {
+  border-color: var(--vp-c-brand-1);
+  background: linear-gradient(135deg, #1463d9, #2f8cff);
+  color: #fff;
+}
+
+.home-hero__visual {
+  border-color: rgb(47 140 255 / 0.22);
+  background:
+    linear-gradient(135deg, rgb(47 140 255 / 0.20), transparent 58%),
+    linear-gradient(35deg, rgb(246 183 60 / 0.18), transparent 42%),
+    var(--vp-c-bg-soft);
+}
+
+.home-hero__visual::before {
+  background-image:
+    linear-gradient(rgb(47 140 255 / 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(47 140 255 / 0.12) 1px, transparent 1px);
+}
+
+.formula-card {
+  border-color: rgb(47 140 255 / 0.22);
+  background: rgb(255 255 255 / 0.82);
+  color: #12345d;
+  box-shadow: 0 24px 80px rgb(20 99 217 / 0.13);
+}
+
+.dark .formula-card {
+  background: rgb(17 30 49 / 0.82);
+}
+
+.orbit {
+  border-color: rgb(47 140 255 / 0.54);
+}
+
+.particle {
+  background: var(--physics-c-accent);
+  box-shadow: 0 0 0 8px rgb(246 183 60 / 0.18);
+}
+
+.particle--two {
+  background: var(--physics-c-sky);
+}
+
+.particle--three {
+  background: var(--physics-c-coral);
+}
+
+.feature-card,
+.download-item {
+  border-color: rgb(47 140 255 / 0.16);
+  background: color-mix(in srgb, var(--vp-c-bg) 88%, white 12%);
+}
+
+.feature-card:hover,
+.download-item:hover {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 14px 34px rgb(20 99 217 / 0.12);
+}
+
+.contribution-panel,
+.mermaid-diagram,
+.markdown-editor-pane > span {
+  border-color: rgb(47 140 255 / 0.18);
+  background: var(--vp-c-bg-soft);
+}
+
+.wiki-edit-link {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 12px;
+}
+
+.wiki-edit-link a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgb(47 140 255 / 0.22);
+  border-radius: 8px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.wiki-edit-link a::before {
+  margin-right: 6px;
+  content: "✎";
+}
+
+.wiki-edit-link a:hover {
+  border-color: var(--vp-c-brand-1);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgb(20 99 217 / 0.12);
+}
+
+.markdown-editor-toolbar small {
+  display: block;
+  margin-top: 8px;
+  color: var(--vp-c-text-2);
+  font-size: 0.88rem;
+}
+
+.markdown-editor-path input,
+.markdown-editor-pane {
+  border-color: rgb(47 140 255 / 0.18);
+}
+
+.markdown-editor-splitter::before {
+  background: rgb(47 140 255 / 0.24);
+}
+
+.markdown-editor-splitter:hover::before,
+.markdown-editor-grid.is-dragging .markdown-editor-splitter::before {
+  background: var(--vp-c-brand-1);
+}

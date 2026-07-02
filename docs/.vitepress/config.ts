@@ -120,7 +120,7 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', href: `${siteBase}assets/favicon.svg`, type: 'image/svg+xml' }],
     ['link', { rel: 'alternate', type: 'application/rss+xml', title: '物理学习指南 RSS', href: `${siteBase}feed.xml` }],
-    ['meta', { name: 'theme-color', content: '#2f5d62' }],
+    ['meta', { name: 'theme-color', content: '#1463d9' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: '物理学习指南' }],
     ['meta', { property: 'og:description', content: '开放、共享、协作的大学物理知识库' }],
@@ -166,7 +166,7 @@ export default defineConfig({
       { text: '贡献指南', link: '/contribution/' },
       { text: 'GitHub', link: 'https://github.com/aoitoribu/betterFuPh' },
       { text: '联系', link: 'mailto:betterfudan@outlook.com' },
-      { text: '欢迎 PR', link: '/contribution/' }
+      { text: '参与共建', link: '/contribution/' }
     ],
     sidebar: generatedSidebar,
     outline: {
