@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vitepress'
 import { downloadsByPage } from '../../generated/downloads'

@@ -5,6 +5,7 @@ import { useRoute } from 'vitepress'
 import mediumZoom from 'medium-zoom'
 import AutoDownloads from './AutoDownloads.vue'
 import UtterancesComments from './UtterancesComments.vue'
+import WikiEditLink from './WikiEditLink.vue'
 
 const { Layout } = DefaultTheme
 const route = useRoute()
@@ -24,6 +25,9 @@ watch(() => route.path, enableImageZoom)
 
 <template>
   <Layout>
+    <template #doc-before>
+      <WikiEditLink />
+    </template>
     <template #doc-after>
       <AutoDownloads />
       <UtterancesComments />

@@ -1,12 +1,12 @@
-﻿<template>
+<template>
   <section class="home-hero" aria-labelledby="home-title">
     <div class="home-hero__content">
       <p class="home-hero__eyebrow">BetterFuPh Open Physics</p>
       <h1 id="home-title">物理学习指南</h1>
-      <p class="home-hero__subtitle">开放、共享、协作的大学物理知识库</p>
+      <p class="home-hero__subtitle">面向复旦物理学习者的开放资料库：课程笔记、真题解析、工具教程和可继续修订的学习路线。</p>
       <div class="home-hero__actions">
         <a class="home-button home-button--primary" href="/betterFuPh/courses/">开始学习</a>
-        <a class="home-button" href="https://github.com/aoitoribu/betterFuPh">GitHub</a>
+        <a class="home-button" href="/betterFuPh/contribution/editor">编辑资料</a>
         <a class="home-button" href="/betterFuPh/contribution/">贡献指南</a>
       </div>
     </div>

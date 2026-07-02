@@ -1,4 +1,4 @@
-﻿import path from 'node:path'
+import path from 'node:path'
 import { docsDir, scanContentFiles, siteUrl, writeGeneratedFile } from './shared.ts'
 
 function escapeXml(value: string): string {
